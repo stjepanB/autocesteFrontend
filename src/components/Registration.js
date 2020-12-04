@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PrivateRegistration from "./PrivateRegistration"
 import LegalRegistration from "./LegalRegistration"
-import { Paper, Radio, FormControl, FormControlLabel, RadioGroup} from '@material-ui/core';
+import {  Radio, FormControl, FormControlLabel, RadioGroup} from '@material-ui/core';
 
 
 export default function Registration() {

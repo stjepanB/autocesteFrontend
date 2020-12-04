@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
-   Checkbox,Link, Paper, Box, Grid, Typography , makeStyles} from '@material-ui/core';
+   Checkbox, Paper, Link as MaterialLin, Box, Grid, Typography , makeStyles} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {login} from "../actions/userActions.js"
+import {Link} from "react-router-dom"
 
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://www.linkedin.com/in/stjepan-bencic/">
+      <MaterialLin color="inherit" href="https://www.linkedin.com/in/stjepan-bencic/">
         Autor
-      </Link>{' '}
+      </MaterialLin>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -73,7 +74,7 @@ function SignInSide(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Prijava korisnika
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
@@ -111,18 +112,11 @@ function SignInSide(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Prijava
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Link to="/register">Reigstracija korisnika</Link>
               </Grid>
             </Grid>
             <Box mt={5}>
