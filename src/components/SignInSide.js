@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
    Checkbox, Paper, Link as MaterialLin, Box, Grid, Typography , makeStyles} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {login} from "../actions/userActions.js"
+import login from "../actions/userActions.js"
 import {Link} from "react-router-dom"
+import {TokenContext} from '../context/TokenContext.js';
 
 
 function Copyright() {
@@ -51,17 +52,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 function SignInSide(props) {
   const classes = useStyles();
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(props.login)
-    login(username,password, props.login)
-  }
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useContext(TokenContext)
+  
+  async function handleSubmit(event) {
+    event.preventDefault();
+    var userData = await login(username,password)
+    setToken(userData.token);
+    localStorage.setItem('token', userData.token)
+    if(userData.token !== "") {
+      console.log(props)
+      props.setIsLoggedIn(true)
+    }
+  }
 
 
   return (

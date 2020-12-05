@@ -1,18 +1,10 @@
-import React, {useContext, useState} from "react"
-import UserContext from "../context/UserContext"
+import React, { useState} from "react"
 
 
-export default function Home() {
-
-    const user = useContext(UserContext)
-    
-
+export default function Home() {    
     return (
         <div>
-           <UserContext.Consumer>
-                <h1>Home page</h1>
-                <p> Token is {user.token}</p>
-            </UserContext.Consumer>
+           <h1>Home page</h1>
         </div>
     )
 }

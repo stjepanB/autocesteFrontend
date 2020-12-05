@@ -2,7 +2,7 @@ import axios from "axios"
 
 
 
-export async function login(us,pass,loginFunc) {
+export default async function login(us,pass) {
     const formData = {
         username: us,
         password: pass
@@ -14,7 +14,7 @@ export async function login(us,pass,loginFunc) {
             isLoggedIn:true
         }
 
-        loginFunc(userData);        
+        return userData      
     }catch(error){
         console.log(error)
     }

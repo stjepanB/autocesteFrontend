@@ -1,51 +1,48 @@
-import React, {useState} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import Navbar from "./components/Navbar"
 import SignInSide from "./components/SignInSide"
 import Home from "./components/Home"
 import Registration from "./components/Registration"
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import UserContext from "./context/UserContext"
+import {BrowserRouter, Route, Switch} from "react-router-dom"
+import  { TokenContextProvider, TokenContext } from "./context/TokenContext"
 
-function App() {
-  const [user, setUser] = useState({
-    isLoggedIn : false,
-    token:"",
+export default function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    if(token){
+      setIsLoggedIn(true)
+    }
   })
-
-  const loginMe = (data) => {
-    setUser({ 
-             isLoggedIn:data.isLoggedIn,
-             token: data.token
-            })
-  };
   
   return (
     <div>
-    <UserContext.provider value={user}>
-    {
-      user.isLoggedIn ?
-      
-        <Router>
-           <Navbar />
-           <Route exact path="/" component={Home} />
-        </Router>
-      
-      : 
-        <Router>
-          <Switch>
-            <Route path="/register" exact component={Registration}/>
-            <Route path="/" 
-                        component={() =>(
-                          <SignInSide login={loginMe} />
-                        )}
-            />
-          </Switch>
-        </Router>
-       
-    }
-    </UserContext.provider>
+      <TokenContextProvider>
+      {
+        isLoggedIn ?
+        
+          <BrowserRouter>
+            <Navbar />
+            <Route exact path="/" component={Home} />
+          </BrowserRouter>
+        
+        : 
+          <BrowserRouter>
+            <Switch>
+              <Route path="/register" exact component={Registration}/> 
+              <Route
+                    path='/'
+                    render={() => (
+                    <SignInSide  setIsLoggedIn={() => setIsLoggedIn(!isLoggedIn)} />
+                  )}
+              />
+            </Switch>
+          </BrowserRouter>
+        
+      }
+      </TokenContextProvider>
     </div>
   );
 }
-
-export default App;
