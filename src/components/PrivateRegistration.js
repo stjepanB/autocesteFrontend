@@ -66,7 +66,8 @@ function Copyright() {
 
     const handleSubmit = function(e){
         e.preventDefault()  
-        register(newUser)
+        const response = register(newUser)
+        console.log(response)
     }
   
  return (

@@ -5,6 +5,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import login from "../actions/userActions.js"
 import {Link} from "react-router-dom"
 import {TokenContext} from '../context/TokenContext.js';
+import message from "../properties/messagesForUser";
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import {validateEmail} from "../validators/registrationValidators"
 
 
 function Copyright() {
@@ -58,17 +63,30 @@ function SignInSide(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useContext(TokenContext)
+  const [open, setOpen] = useState(false)
+  const [emailError, setEmailError] = useState(false)
   
   async function handleSubmit(event) {
     event.preventDefault();
     var userData = await login(username,password)
+    if(userData === null) {
+      setOpen(true)
+      return
+    }
     setToken(userData.token);
     localStorage.setItem('token', userData.token)
     if(userData.token !== "") {
-      console.log(props)
       props.setIsLoggedIn(true)
     }
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
 
   return (
@@ -77,6 +95,23 @@ function SignInSide(props) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            message={message.loginFailed}
+            action={
+              <React.Fragment>
+                <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -94,7 +129,11 @@ function SignInSide(props) {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(e)=>setUsername(e.target.value)}
+              error={emailError}
+              onChange={(e)=>{
+                setEmailError(validateEmail(e.target.value))
+                setUsername(e.target.value)
+              }}
             />
             <TextField
               variant="outlined"
@@ -118,6 +157,7 @@ function SignInSide(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={emailError}
             >
               Prijava
             </Button>
