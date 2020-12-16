@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {validateEmail,validateOib,validatePassword} from "../validators/registrationValidators"
+import {register} from "../actions/userActions"
 
 
 function Copyright() {
@@ -57,11 +58,16 @@ function Copyright() {
         firstName:"",
         lastName: "",
         email:"",
+        address:"",
         oib: 0,
         password:"",  
     })
     const [repeatePassword, setRepeatePassword] = useState("");
 
+    const handleSubmit = function(e){
+        e.preventDefault()  
+        register(newUser)
+    }
   
  return (
 
@@ -74,7 +80,7 @@ function Copyright() {
           <Typography component="h1" variant="h5">
             Registracija korisnika
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -112,8 +118,24 @@ function Copyright() {
                   variant="outlined"
                   required
                   fullWidth
+                  id="address"
+                  label="Adresa"
+                  name="address"
+                  onChange={e=>{
+                      setNewUser({
+                          ...newUser,
+                          address:e.target.value
+                      })
+                    }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
                   error={errors.emailError}
@@ -194,7 +216,6 @@ function Copyright() {
                         })}
                     }
                 />
-
               </Grid>
             </Grid>
             <Button

@@ -90,9 +90,9 @@ function SignInSide(props) {
               required
               fullWidth
               id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              label="email"
+              name="email"
+              autoComplete="email"
               autoFocus
               onChange={(e)=>setUsername(e.target.value)}
             />
@@ -101,8 +101,8 @@ function SignInSide(props) {
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
+              name="Lozinka"
+              label="Lozinka"
               type="password"
               id="password"
               autoComplete="current-password"

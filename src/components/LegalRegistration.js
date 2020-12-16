@@ -188,6 +188,7 @@ function Copyright() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled
             >
               Registriraj se
             </Button>
