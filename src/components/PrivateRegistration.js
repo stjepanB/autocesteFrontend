@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {validateEmail,validateOib,validatePassword} from "../validators/registrationValidators"
 import {register} from "../actions/userActions"
+import message from "../properties/messagesForUser";
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 function Copyright() {
@@ -63,18 +65,61 @@ function Copyright() {
         password:"",  
     })
     const [repeatePassword, setRepeatePassword] = useState("");
-
+    const [open, setOpen] = useState(false)
+    const handleLogin = function(e) {
+      window.location.replace("/")
+    }
     const handleSubmit = function(e){
         e.preventDefault()  
         const response = register(newUser)
-        console.log(response)
+        if(response !== null){
+          setOpen(true)
+        }
     }
+  
+
+    useEffect(()=>{
+          let b = (Math.floor(Math.random() * 10000000000))         
+          let a = 10;
+          
+          for (let i = 0; i < 10; i++) {
+            a = a + parseInt(b.toString().substr(i, 1), 10);
+            a = a % 10;
+            if (a === 0) {
+              a = 10;
+            }
+            a *= 2;
+            a = a % 11;
+          }
+          let control = 11 - a;
+          if (control === 10) {
+            control = 0;
+          }
+          b*= 10
+          b+= control
+          console.log("Generirani oib " + b)
+        
+        }, [])
   
  return (
 
 <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            open={open}
+            autoHideDuration={6000}
+            message={message.successfulRegistration}
+            action={
+              <React.Fragment>
+                    <Button variant="contained" color="primary" onClick={handleLogin}>Prijavi se</Button>
+              </React.Fragment>
+            }
+          />
           <Avatar className={classes.avatar}>
             <AirportShuttleOutlinedIcon />
           </Avatar>

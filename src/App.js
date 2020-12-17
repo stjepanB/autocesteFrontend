@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useContext} from "react"
+import React, {useState, useEffect} from "react"
 import Navbar from "./components/Navbar"
 import SignInSide from "./components/SignInSide"
 import Home from "./components/Home"
 import Registration from "./components/Registration"
 import {BrowserRouter, Route, Switch} from "react-router-dom"
-import  { TokenContextProvider, TokenContext } from "./context/TokenContext"
+import  { TokenContextProvider } from "./context/TokenContext"
 
 export default function App() {
 
@@ -15,7 +15,7 @@ export default function App() {
     if(token){
       setIsLoggedIn(true)
     }
-  })
+  }, [])
   
   return (
     <div>

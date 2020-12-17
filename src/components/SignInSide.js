@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
-   Checkbox, Paper, Link as MaterialLin, Box, Grid, Typography , makeStyles} from '@material-ui/core';
+import { Avatar, Button, CssBaseline, TextField,
+    Paper, Link as MaterialLin, Box, Grid, Typography , makeStyles} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import login from "../actions/userActions.js"
 import {Link} from "react-router-dom"
@@ -17,7 +17,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <MaterialLin color="inherit" href="https://www.linkedin.com/in/stjepan-bencic/">
-        Autor
+        O Autoru
       </MaterialLin>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -146,10 +146,6 @@ function SignInSide(props) {
               id="password"
               autoComplete="current-password"
               onChange={(e)=>setPassword(e.target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
