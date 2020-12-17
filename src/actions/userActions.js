@@ -9,14 +9,15 @@ export default async function login(us,pass) {
     }
     try{    
         const response = await axios.post(url.login,formData, {withCredentials:true})          
+        console.log(response.headers)
         var userData = {
             token: response.headers.authorization,
             isLoggedIn:true
         }
-
         return userData      
-    }catch(error){
+    }catch(error){ 
         console.log(error)
+        return null
     }
 }
 
@@ -37,11 +38,11 @@ export async function register(user){
             url : url.register,
             headers: {},
             data: formData
-        })          
-        console.log(response)
-        return    
+        })         
+        return response    
     }catch(error){
         console.log(error)
+        return null
     }
 }
 
