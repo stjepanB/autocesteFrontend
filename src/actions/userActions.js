@@ -38,8 +38,9 @@ export async function register(user){
             url : url.register,
             headers: {},
             data: formData
-        })         
-        return response    
+        })      
+        console.log(response.data)   
+        return response.data  
     }catch(error){
         console.log(error)
         return null

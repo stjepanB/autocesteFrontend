@@ -66,13 +66,18 @@ function Copyright() {
     })
     const [repeatePassword, setRepeatePassword] = useState("");
     const [open, setOpen] = useState(false)
+    const [msg, setMsg] = useState("")
     const handleLogin = function(e) {
       window.location.replace("/")
     }
-    const handleSubmit = function(e){
+    const handleSubmit = async function(e){
         e.preventDefault()  
-        const response = register(newUser)
+        const response = await register(newUser)
         if(response !== null){
+          response.data === "CONFLICT" ? setMsg(message.userExists) : setMsg(message.successfulRegistration);
+          setOpen(true)
+        }else {
+          setMsg(message.systemError)
           setOpen(true)
         }
     }
@@ -113,7 +118,7 @@ function Copyright() {
             }}
             open={open}
             autoHideDuration={6000}
-            message={message.successfulRegistration}
+            message={msg}
             action={
               <React.Fragment>
                     <Button variant="contained" color="primary" onClick={handleLogin}>Prijavi se</Button>
