@@ -1,4 +1,5 @@
-
+import url from "../properties/constants"
+import axios from "axios"
 function createData(id, date, name, shipTo, paymentMethod, amount) {
     return { id, date, name, shipTo, paymentMethod, amount };
   }
@@ -11,6 +12,28 @@ function createData(id, date, name, shipTo, paymentMethod, amount) {
     createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
   ];
 
-export function getVehicles(){
+export async function getVehicles(token){
+  const config = {
+    headers: {
+       Authorization: token
+    }
+  }
+    console.log(rows.length)
+    //const response = await axios.get(url.vehicles, config)
     return rows
+}
+
+
+export async function registerVehicle(vehicle,token){
+  const config = {
+    headers: {
+       Authorization: token
+    }
+  }
+  try{
+    const response = await axios.post(url.vehicleRegister,vehicle, config)
+    
+  }catch(error){
+
+  }
 }

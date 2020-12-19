@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import {getVehicles} from "../actions/vehicleActions"
+import {getVehicles} from "../../actions/vehicleActions"
 
 
 
@@ -14,13 +14,16 @@ export default function Vehicles(){
 
     const [rows, setRows] = useState([])
     useEffect(() => {
-        setRows(getVehicles())
+        async function fetch(){
+            setRows(await getVehicles())
+        }
+        fetch();
     }, [])
 
 
     return (
 
-                rows.length === 0 ? 
+                rows.length !== 0 ? 
                 <React.Fragment>
                     <Title>Registrirana vozila</Title>
                     <Button>Dodaj</Button>
@@ -41,7 +44,8 @@ export default function Vehicles(){
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {rows.map((row) => (
+                        { 
+                           rows.map((row) => (
                             <TableRow key={row.id}>
                             <TableCell>{row.date}</TableCell>
                             <TableCell>{row.name}</TableCell>
@@ -49,7 +53,8 @@ export default function Vehicles(){
                             <TableCell>{row.paymentMethod}</TableCell>
                             <TableCell align="right">{row.amount}</TableCell>
                             </TableRow>
-                        ))}
+                            ))
+                        }
                         </TableBody>
                 </Table>
                 <Button>Dodaj</Button>
