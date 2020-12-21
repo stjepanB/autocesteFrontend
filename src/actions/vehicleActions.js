@@ -30,10 +30,14 @@ export async function registerVehicle(vehicle,token){
        Authorization: token
     }
   }
+  console.log(url.vehicleRegister)
+  console.log("Saljem " + vehicle)
+  console.log(token)
+
   try{
     const response = await axios.post(url.vehicleRegister,vehicle, config)
-    
+    console.log(response)
   }catch(error){
-
+    console.log(error)
   }
 }
