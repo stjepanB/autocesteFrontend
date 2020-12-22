@@ -18,7 +18,7 @@ export async function getVehicles(token){
        Authorization: token
     }
   }
-    console.log(rows.length)
+    console.log(rows.length + config)
     //const response = await axios.get(url.vehicles, config)
     return rows
 }
@@ -31,7 +31,7 @@ export async function registerVehicle(vehicle,token){
     }
   }
   console.log(url.vehicleRegister)
-  console.log("Saljem " + vehicle)
+  console.log("Saljem " + vehicle.plate)
   console.log(token)
 
   try{

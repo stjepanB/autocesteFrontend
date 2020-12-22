@@ -104,7 +104,7 @@ export default function RegisterVehicle(){
           maxWeight: vehicle.maxWeightWithCargo,
           height:vehicle.height
         }
-        registerVehicle(vehicleDto,token)
+        registerVehicle(vehicleDto,token[0])
     }
     
 
@@ -159,7 +159,7 @@ export default function RegisterVehicle(){
                                 >
                                   {
                                     towns.map((t) => {
-                                      return <MenuItem value={t}>{t}</MenuItem>
+                                      return <MenuItem value={t} key={t}>{t}</MenuItem>
                                     })
                                   }
                                 </Select>
@@ -304,7 +304,7 @@ export default function RegisterVehicle(){
                               >
                                 {
                                   cats.map((t) => {
-                                    return <MenuItem value={t}>{t}</MenuItem>
+                                    return <MenuItem value={t} key={t}>{t}</MenuItem>
                                   })
                                 }
                               </Select>
