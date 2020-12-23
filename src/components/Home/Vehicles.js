@@ -7,6 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import {getVehicles} from "../../actions/vehicleActions"
+import {Link} from "react-router-dom"
+import {localUrl} from "../../properties/constants"
 
 
 
@@ -23,10 +25,18 @@ export default function Vehicles(){
 
     return (
 
-                rows.length !== 0 ? 
+                rows.length === 0 ? 
                 <React.Fragment>
                     <Title>Registrirana vozila</Title>
-                    <Button>Dodaj</Button>
+                    <Link to={localUrl.vehicleRegister}>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                        > 
+                            Dodaj
+                        </Button>
+                    </Link>
                     
                 </React.Fragment>
 
@@ -36,28 +46,36 @@ export default function Vehicles(){
                     <Table size="small">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Ship To</TableCell>
-                            <TableCell>Payment Method</TableCell>
-                            <TableCell align="right">Sale Amount</TableCell>
+                            <TableCell>Registracija</TableCell>
+                            <TableCell>Kategorija</TableCell>
+                            <TableCell>Proizvođač</TableCell>
+                            <TableCell>Model</TableCell>
+                            <TableCell align="right">Težina s teretom (kg)</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
                         { 
                            rows.map((row) => (
                             <TableRow key={row.id}>
-                            <TableCell>{row.date}</TableCell>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.shipTo}</TableCell>
-                            <TableCell>{row.paymentMethod}</TableCell>
-                            <TableCell align="right">{row.amount}</TableCell>
+                            <TableCell>{row.plate}</TableCell>
+                            <TableCell>{row.category}</TableCell>
+                            <TableCell>{row.manufacturer}</TableCell>
+                            <TableCell>{row.type}</TableCell>
+                            <TableCell align="right">{row.maxWeightWithCargo}</TableCell>
                             </TableRow>
                             ))
                         }
                         </TableBody>
                 </Table>
-                <Button>Dodaj</Button>
+                <Link to={localUrl.vehicleRegister}>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                    > 
+                        Dodaj
+                    </Button>
+                </Link>
                 </React.Fragment>
                 
 

@@ -1,10 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import { Avatar, Button, CssBaseline, TextField,
     Paper, Link as MaterialLin, Box, Grid, Typography , makeStyles} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import login from "../actions/userActions.js"
 import {Link} from "react-router-dom"
-import {TokenContext} from '../context/TokenContext.js';
 import message from "../properties/messagesForUser";
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -62,7 +61,6 @@ function SignInSide(props) {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useContext(TokenContext)
   const [open, setOpen] = useState(false)
   const [emailError, setEmailError] = useState(false)
   
@@ -73,7 +71,6 @@ function SignInSide(props) {
       setOpen(true)
       return
     }
-    setToken(userData.token);
     localStorage.setItem('token', userData.token)
     if(userData.token !== "") {
       props.setIsLoggedIn(true)

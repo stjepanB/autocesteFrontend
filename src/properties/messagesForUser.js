@@ -5,6 +5,7 @@ const message = {
         successfulRegistration: "Uspješna registracija!",
         userExists: "Korisnik postoji u sustavu.",
         systemError: "Došlo je do pogreške u sustavu",
+        vehicleRegistrationFailed : "Automobil već postoji u sustavu",
         vehicleCategories : [
                 { 
                         category: "IA",

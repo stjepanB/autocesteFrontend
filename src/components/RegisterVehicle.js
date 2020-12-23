@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import message from "../properties/messagesForUser"
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,8 +17,12 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {validateWeight,validatePlateLetters,validatePlateNumber,validateAxles,validateHeight} from "../validators/vehicleValidators"
-import {TokenContext} from "../context/TokenContext"
 import {registerVehicle} from "../actions/vehicleActions"
+import {Link} from "react-router-dom"
+import {localUrl} from "../properties/constants"
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,7 +67,6 @@ const Chapters = function ({ value }) {
 
 export default function RegisterVehicle(){
     const classes = useStyles();
-    const token = useContext(TokenContext)
 
     const [vehicle, setVehicle] = useState({
       manufacturer:"",
@@ -79,6 +82,7 @@ export default function RegisterVehicle(){
     const [plateLetters, setPlateLetters] = useState(undefined)
     const towns = [ 'ZG','BJ','BM','ČK','DA','DE','DJ','DU','GS','IM','KA','KC','KR','KT','KŽ','MA','NA','NG','OG','OS','PU','PŽ','RI','SB','SK','SL','ST','ŠI','VK','VT','VU','VŽ','ZD','ŽU']
     const cats = ['IA', 'I', 'II', 'III', 'IV']
+    const [open,setOpen] = useState(false)
     const [errors,setErrors] = useState({
         category: false,
         town: false,
@@ -92,6 +96,12 @@ export default function RegisterVehicle(){
     const handleChange = (event) => {
       setTown(event.target.value);
     };
+    const handleClose = (event,reason) =>{
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    }
 
     const handleSubmit = async function(e) {
         e.preventDefault();
@@ -104,12 +114,35 @@ export default function RegisterVehicle(){
           maxWeight: vehicle.maxWeightWithCargo,
           height:vehicle.height
         }
-        registerVehicle(vehicleDto,token[0])
+        const response = await registerVehicle(vehicleDto)
+        console.log(response)
+        if(response === "OK"){
+            window.location.replace("/")
+        }else {
+          setOpen(true)
+        }
     }
     
 
     return(
         <div>
+          <Snackbar
+                anchorOrigin={{
+                vertical: 'bottom',
+                              horizontal: 'right',
+                            }}
+                            open={open}
+                            autoHideDuration={6000}
+                            onClose={handleClose}
+                            message={message.vehicleRegistrationFailed}
+                            action={
+                              <React.Fragment>
+                                <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                                  <CloseIcon fontSize="small" />
+                                </IconButton>
+                              </React.Fragment>
+                            }
+          />
           <form  onSubmit={handleSubmit}>
             <Grid container direction="row" spacing={3}>
                 <Grid item xs={6}>      
@@ -326,7 +359,7 @@ export default function RegisterVehicle(){
                               autoFocus
                             />
                           </Grid>
-                          <Grid item xs={12}>
+                          <Grid item xs={6}>
                             <Button
                               type="submit"
                               fullWidth
@@ -336,6 +369,17 @@ export default function RegisterVehicle(){
                             >
                               Spremi
                             </Button>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Link to={localUrl.homepage}>
+                                <Button
+                                    fullWidth
+                                    variant="contained"
+                                    color="secondary"
+                                > 
+                                    Odustani
+                                </Button>
+                            </Link>
                           </Grid>
                         </Grid>
                         
