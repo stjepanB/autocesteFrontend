@@ -9,7 +9,6 @@ export default async function login(us,pass) {
     }
     try{    
         const response = await axios.post(url.login,formData, {withCredentials:true})          
-        console.log(response.headers)
         var userData = {
             token: response.headers.authorization,
             isLoggedIn:true
@@ -38,12 +37,23 @@ export async function register(user){
             url : url.register,
             headers: {},
             data: formData
-        })         
-        return response    
+        })      
+        return response.data  
     }catch(error){
         console.log(error)
         return null
     }
+}
+
+export async function getProfile(){
+  var token = localStorage.getItem("token");
+  const config = {
+    headers: {
+       Authorization: token
+    }
+  }
+    const response = await axios.get(url.profile, config)
+    return response.data
 }
 
 

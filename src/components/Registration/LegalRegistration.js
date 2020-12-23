@@ -10,7 +10,7 @@ import AirportShuttleOutlinedIcon from '@material-ui/icons/AirportShuttleOutline
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {validateEmail,validateOib,validatePassword} from "../validators/registrationValidators"
+import {validateEmail,validateOib,validatePassword} from "../../validators/registrationValidators"
 
 
 function Copyright() {
