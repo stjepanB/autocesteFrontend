@@ -11,8 +11,16 @@ export default async function login(us,pass) {
         const response = await axios.post(url.login,formData, {withCredentials:true})          
         var userData = {
             token: response.headers.authorization,
-            isLoggedIn:true
+            isLoggedIn:true,
+            isAdmin: false
         }
+        const config = {
+            headers: {
+               Authorization: userData.token
+            }
+          }
+        const admin = await axios.get(url.isAdmin,config)
+        userData.isAdmin = admin.data;
         return userData      
     }catch(error){ 
         console.log(error)

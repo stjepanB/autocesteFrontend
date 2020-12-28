@@ -72,8 +72,12 @@ function SignInSide(props) {
       return
     }
     localStorage.setItem('token', userData.token)
+    localStorage.setItem('admin', userData.isAdmin)
     if(userData.token !== "") {
       props.setIsLoggedIn(true)
+    }
+    if(userData.isAdmin !== null){
+      props.setIsAdmin(userData.isAdmin)
     }
   }
 
@@ -81,7 +85,6 @@ function SignInSide(props) {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 

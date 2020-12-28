@@ -5,7 +5,8 @@ const url = {
     login :root + "/login",
     vehicles: root + "/vehicles",    
     vehicleRegister : root + "/vehicle",
-    profile: root + "/profile"
+    profile: root + "/profile",
+    isAdmin: root + '/admin'
 }
 
 export const localUrl = {
