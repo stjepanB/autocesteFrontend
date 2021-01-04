@@ -26,10 +26,6 @@ export default function App() {
     }
   },[isLoggedIn, isAdmin])
   
-  if(isLoggedIn){
-    console.log(isAdmin)
-  }
-
   return (
     <div>
       <TokenContextProvider>
