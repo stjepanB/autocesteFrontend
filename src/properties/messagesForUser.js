@@ -30,7 +30,8 @@ const message = {
         ],
         pricesSetup : "Cijene dionica",
         infrastructureCost: "Infrastrukturna pristojba",
-        outsideCost: "Vanjski troškovi"
+        outsideCost: "Vanjski troškovi",
+        selectSection: "Dionica autoceste",
 }
 
 

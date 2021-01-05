@@ -16,7 +16,7 @@ export default function App() {
   useEffect(()=>{
     const token = localStorage.getItem('token');
     const tmpIsAdmin = localStorage.getItem('admin');
-    
+
     if(token){
       setIsLoggedIn(true)
     }
@@ -24,7 +24,7 @@ export default function App() {
     if(tmpIsAdmin){
       setIsAdmin(tmpIsAdmin)
     }
-  },[isLoggedIn, isAdmin])
+  },[])
   
   return (
     <div>

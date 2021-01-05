@@ -76,7 +76,7 @@ function SignInSide(props) {
     if(userData.token !== "") {
       props.setIsLoggedIn(true)
     }
-    if(userData.isAdmin !== null){
+    if(userData.isAdmin){
       props.setIsAdmin(userData.isAdmin)
     }
   }
