@@ -32,6 +32,8 @@ const message = {
         infrastructureCost: "Infrastrukturna pristojba",
         outsideCost: "Vanjski troškovi",
         selectSection: "Dionica autoceste",
+        unit : "kn/km",
+        save: "Spremi",
 }
 
 

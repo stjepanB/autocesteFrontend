@@ -1,9 +1,16 @@
 import  {useState, useEffect} from "react"
-import { Paper, Chip, Divider, CircularProgress , Select, MenuItem, InputLabel, FormControl, Grid, FilledInput,InputAdornment } from "@material-ui/core";
+import { Paper, CircularProgress , FormLabel, Select, MenuItem, InputLabel, FormControl, Grid, FilledInput,InputAdornment } from "@material-ui/core";
 import message from "../../properties/messagesForUser";
 import Title from "../Home/Title";
 import { makeStyles } from '@material-ui/core/styles';
 import {getSectionsPrices} from '../../actions/adminActions'
+import "./prices.css";
+import { green } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import CheckIcon from '@material-ui/icons/Check';
+import SaveIcon from '@material-ui/icons/Save';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,6 +25,35 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       minWidth: 200
     },
+    fabButtonRoot: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonSuccess: {
+        backgroundColor: green[500],
+        '&:hover': {
+          backgroundColor: green[700],
+        },
+    },
+    fabProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: -6,
+        left: -6,
+        zIndex: 1,
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
     withoutLabel: {
       marginTop: theme.spacing(3),
     },
@@ -29,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
       },
+
     circular: {
         display: 'flex',
         '& > * + *': {
@@ -47,6 +84,19 @@ export default function Prices () {
         outside: 1.10
     })
     const [values, setValues] = useState([]);
+    const [buttonLoading, setButtonLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const buttonClassname = clsx({
+        [classes.buttonSuccess]: success,
+      });
+
+      const handleButtonClick = () => {
+        if (!buttonLoading) {
+          setSuccess(false);
+          setButtonLoading(true);
+        }
+      };
+    
 
     useEffect(() => {
             async function fetch(){
@@ -121,8 +171,8 @@ export default function Prices () {
             <Paper className={classes.paper} variant="outlined">
                 <Title children={message.pricesSetup} />
                 <form onSubmit={handleSubmit}>
-                <Grid container justify="center" spacing={3}>
-                        <Grid item xs={12}>
+                <Grid container  spacing={2}>
+                        <Grid  item xs={12}>
                             <FormControl className={classes.formControl}>
                                 <InputLabel id="demo-simple-select-helper-label">{message.selectSection}</InputLabel>
                                 <Select
@@ -138,6 +188,9 @@ export default function Prices () {
                                 </Select>
                             </FormControl>
                         </Grid>
+                        <Grid item  xs={2}>
+                            <FormLabel>Kategorija IA</FormLabel>
+                        </Grid>
                         <Grid item xs={5}>
                             <FormControl fullWidth className={classes.margin} variant="filled">
                                 <InputLabel htmlFor="infrastructure-IA">{message.infrastructureCost}</InputLabel>
@@ -146,7 +199,7 @@ export default function Prices () {
                                     value={current.IA.infrastructure}
                                     type="number"
                                     onChange={handleInfrastructure}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
@@ -158,14 +211,13 @@ export default function Prices () {
                                     value={current.IA.outside}
                                     type="number"
                                     onChange={handleOutside}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <Chip label="Kategorija IA"/>
+                            <FormLabel>Kategorija I</FormLabel>
                         </Grid>
-                        <Divider />
                         <Grid item xs={5}>
                             <FormControl fullWidth className={classes.margin} variant="filled">
                                 <InputLabel htmlFor="infrastructure-I">{message.infrastructureCost}</InputLabel>
@@ -174,7 +226,7 @@ export default function Prices () {
                                     value={current.I.infrastructure}
                                     type="number"
                                     onChange={handleInfrastructure}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
@@ -186,14 +238,13 @@ export default function Prices () {
                                     value={current.I.outside}
                                     type="number"
                                     onChange={handleOutside}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <Chip label="Kategorija I"/>
+                            <FormLabel>Kategorija II</FormLabel>
                         </Grid>
-                        <Divider />
                         <Grid item xs={5}>
                             <FormControl fullWidth className={classes.margin} variant="filled">
                                 <InputLabel htmlFor="infrastructure-II">{message.infrastructureCost}</InputLabel>
@@ -202,7 +253,7 @@ export default function Prices () {
                                     value={current.II.infrastructure}
                                     type="number"
                                     onChange={handleInfrastructure}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
@@ -214,14 +265,13 @@ export default function Prices () {
                                     value={current.II.outside}
                                     type="number"
                                     onChange={handleOutside}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <Chip label="Kategorija II"/>
+                            <FormLabel>Kategorija III</FormLabel>
                         </Grid>
-                        <Divider />
                         <Grid item xs={5}>
                             <FormControl fullWidth className={classes.margin} variant="filled">
                                 <InputLabel htmlFor="infrastructure-III">{message.infrastructureCost}</InputLabel>
@@ -230,7 +280,7 @@ export default function Prices () {
                                     value={current.III.infrastructure}
                                     type="number"
                                     onChange={handleInfrastructure}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
@@ -242,14 +292,13 @@ export default function Prices () {
                                     value={current.III.outside}
                                     type="number"
                                     onChange={handleOutside}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <Chip label="Kategorija III"/>
-                        </Grid>
-                        <Divider />
+                            <FormLabel>Kategorija IV</FormLabel>
+                        </Grid>                
                         <Grid item xs={5}>
                             <FormControl fullWidth className={classes.margin} variant="filled">
                                 <InputLabel htmlFor="infrastructure-IV">{message.infrastructureCost}</InputLabel>
@@ -259,7 +308,7 @@ export default function Prices () {
                                     type="number"
                                     onChange={handleInfrastructure}
                                 
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
@@ -271,12 +320,36 @@ export default function Prices () {
                                     value={current.IV.outside}
                                     type="number"
                                     onChange={handleOutside}
-                                    endAdornment={<InputAdornment position="start">kn</InputAdornment>}
+                                    endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                 />
                             </FormControl>
                         </Grid>
-                        <Grid item xs={2}>
-                            <Chip label="Kategorija IV"/>
+                        <Grid item xs={12}>
+                            <div className={classes.fabButtonRoot}>
+                                <div className={classes.wrapper}>
+                                    <Fab
+                                        aria-label="save"
+                                        color="primary"
+                                        className={buttonClassname}
+                                        onClick={handleButtonClick}
+                                    >
+                                        {success ? <CheckIcon /> : <SaveIcon />}
+                                    </Fab>
+                                    {buttonLoading && <CircularProgress size={68} className={classes.fabProgress} />}
+                                </div>
+                                <div className={classes.wrapper}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={buttonClassname}
+                                    disabled={buttonLoading}
+                                    onClick={handleButtonClick}
+                                >
+                                   {message.save}
+                                </Button>
+                                 {buttonLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                                </div>
+                            </div>
                         </Grid>
                 </Grid>
                 </form>

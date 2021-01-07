@@ -6,7 +6,8 @@ const url = {
     vehicles: root + "/vehicles",    
     vehicleRegister : root + "/vehicle",
     profile: root + "/profile",
-    isAdmin: root + '/admin'
+    isAdmin: root + '/admin',
+    sections: root + "/sections",
 }
 
 export const localUrl = {

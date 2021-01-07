@@ -3,6 +3,21 @@ import url from "../properties/constants";
 
 
 export async function getSectionsPrices(){
+
+        var token = localStorage.getItem("token");
+        const config = {
+             headers: {
+                   Authorization: token
+                }
+        }
+    const response = await axios.get(url.sections, config)
+    console.log(response.data[0]['IA'])
+    return response.data
+}
+
+/** HARDCODE DATA
+ * 
+ * 
         const tmp =  [{
                 key: 1,
                 section : 'Šibenik - Split',
@@ -55,5 +70,4 @@ export async function getSectionsPrices(){
                 
             }
         ]
-        return tmp;
-}
+ */
