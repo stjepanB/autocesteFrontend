@@ -115,7 +115,7 @@ export default function RegisterVehicle(){
           height:vehicle.height
         }
         const response = await registerVehicle(vehicleDto)
-        console.log(response)
+
         if(response === "OK"){
             window.location.replace("/")
         }else {

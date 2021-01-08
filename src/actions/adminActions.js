@@ -2,22 +2,39 @@ import axios from "axios"
 import url from "../properties/constants";
 
 
-export async function getSectionsPrices(){
+export async function getSectionsPrices() {
 
         var token = localStorage.getItem("token");
         const config = {
-             headers: {
-                   Authorization: token
+                headers: {
+                        Authorization: token
                 }
         }
-    const response = await axios.get(url.sections, config)
-    console.log(response.data[0]['IA'])
-    return response.data
+        const response = await axios.get(url.sections, config)
+        return response.data
+}
+
+export async function setSectionsPrices(sectionsDto) {
+        var token = localStorage.getItem("token");
+        const config = {
+                headers: {
+                        Authorization: token
+                }
+        }
+        
+        console.log(sectionsDto)
+        try {
+                const response = await axios.post(url.sections, sectionsDto, config)
+                return response.data
+        } catch (error) {
+                console.log(error)
+                return "FAILED"
+        }
 }
 
 /** HARDCODE DATA
- * 
- * 
+ *
+ *
         const tmp =  [{
                 key: 1,
                 section : 'Šibenik - Split',
@@ -42,7 +59,7 @@ export async function getSectionsPrices(){
                         infrastructure: 23.50,
                         outside: 1.10
                 }
-                
+
             },
             {
                 key: 2,
@@ -67,7 +84,7 @@ export async function getSectionsPrices(){
                         infrastructure: 23.50,
                         outside: 1.10
                 }
-                
+
             }
         ]
  */

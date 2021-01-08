@@ -34,6 +34,7 @@ const message = {
         selectSection: "Dionica autoceste",
         unit : "kn/km",
         save: "Spremi",
+        DiscountLabel: "Oznake za popuste",
 }
 
 
