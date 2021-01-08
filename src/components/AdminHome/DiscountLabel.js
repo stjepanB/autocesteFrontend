@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DiscountLabel() {
     const classes = useStyles()
-    const [selectedItem, setSelectedItem] = useState("privateUser")
+    const [selectedItem, setSelectedItem] = useState("vehicle")
 
 
     return (

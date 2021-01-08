@@ -32,6 +32,19 @@ export async function setSectionsPrices(sectionsDto) {
         }
 }
 
+export function getVehicleNumberTypes() {
+        return [
+                {
+                        key :1,
+                        name: "Težina s teretom"
+                },
+                {
+                        key: 2,
+                        name: "Visina vozila"
+                }
+        ]
+}
+
 /** HARDCODE DATA
  *
  *

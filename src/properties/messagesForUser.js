@@ -28,6 +28,14 @@ const message = {
                         desc: "a.)	Motorna vozila s četiri ili više osovina mase preko 3500 kg\nb.)	Motorna vozila s dvije osovine , najveće dopuštene mase preko 3500 kg, koja vuku priključno vozilo s dvije ili više osovina\nc.)	Motorna vozila s tri osovine , najveće dopuštene mase preko  3500 kg, koja vuku priključno vozilo , neovisno o broju osovina priključnog vozila"
                 }
         ],
+        vehicleCategory : "Kategorija",
+        vehicleCategoriesNames : {
+                IA : "Kategorija IA",
+                I : "Kategorija I",
+                II : "Kategorija II",
+                III : "Kategorija III",
+                IV : "Kategorija IV" 
+        },
         pricesSetup : "Cijene dionica",
         infrastructureCost: "Infrastrukturna pristojba",
         outsideCost: "Vanjski troškovi",
@@ -35,6 +43,7 @@ const message = {
         unit : "kn/km",
         save: "Spremi",
         DiscountLabel: "Oznake za popuste",
+        Discount: "Popusti",
 }
 
 

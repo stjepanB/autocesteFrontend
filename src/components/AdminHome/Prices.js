@@ -195,7 +195,7 @@ export default function Prices() {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={2}>
-                                <FormLabel>Kategorija IA</FormLabel>
+                                <FormLabel>{message.vehicleCategoriesNames.IA}</FormLabel>
                             </Grid>
                             <Grid item xs={5}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
@@ -222,7 +222,7 @@ export default function Prices() {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={2}>
-                                <FormLabel>Kategorija I</FormLabel>
+                                <FormLabel>{message.vehicleCategoriesNames.I}</FormLabel>
                             </Grid>
                             <Grid item xs={5}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
@@ -249,7 +249,7 @@ export default function Prices() {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={2}>
-                                <FormLabel>Kategorija II</FormLabel>
+                                <FormLabel>{message.vehicleCategoriesNames.II}</FormLabel>
                             </Grid>
                             <Grid item xs={5}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
@@ -276,7 +276,7 @@ export default function Prices() {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={2}>
-                                <FormLabel>Kategorija III</FormLabel>
+                                <FormLabel>{message.vehicleCategoriesNames.III}</FormLabel>
                             </Grid>
                             <Grid item xs={5}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
@@ -303,7 +303,7 @@ export default function Prices() {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={2}>
-                                <FormLabel>Kategorija IV</FormLabel>
+                                <FormLabel>{message.vehicleCategoriesNames.IV}</FormLabel>
                             </Grid>
                             <Grid item xs={5}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
