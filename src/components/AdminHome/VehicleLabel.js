@@ -1,6 +1,6 @@
-import { getVehicleNumberTypes } from "../../actions/adminActions"
+import { getVehicleParams } from "../../actions/vehicleActions"
 import React, { useEffect, useState } from "react";
-import { Grid, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
+import { Grid, TextField, Button, FilledInput, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import message from "../../properties/messagesForUser";
 
@@ -10,16 +10,20 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
+    formControl: {
+        minWidth: 220,
+    }
 
 }));
 
 export default function VehicleLabel() {
     const classes = useStyles();
-    const [type, setType] = useState({
-        key : 1,
-        name: "Težina s teretom"
+    const [param, setParam] = useState({
+        key: 1,
+        name: "Težina s teretom",
+        type: "numerical"
     });
-    const [types, setTypes] = useState([]);
+    const [params, setParams] = useState([]);
     const [vehicleCategories] = useState([
         {
             key: 1,
@@ -46,18 +50,25 @@ export default function VehicleLabel() {
     const [vehicleCategory, setVehicleCategory] = useState({
         key: 1,
         category: message.vehicleCategoriesNames.IA
-
     })
-
+    const [numericalOperations] = useState([
+        "vise (>)", "manje (<)", "jednako (=)"
+    ])
+    const [currentOperation, setCurrentOperation] = useState("vise (>)")
+    const [paramValue, setParamValue] = useState({})
 
     useEffect(() => {
-        const tmp = getVehicleNumberTypes();
-        setTypes(tmp); //change for async function
-        setType(tmp[0]);
+        const tmp = getVehicleParams();
+        setParams(tmp); //change for async function
+        setParam(tmp[0]);
     }, [])
 
-    const selectNumberType = (e) => {
-        setType(types.filter(l => l.name === e.target.value)[0]);
+    const selectParam = (e) => {
+        setParam(params.filter(l => l.name === e.target.value)[0]);
+    }
+
+    const handleLabelName = (e) => {
+
     }
 
     const selectVehicleCategory = (event) => {
@@ -70,15 +81,29 @@ export default function VehicleLabel() {
         <div>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
+                    <TextField
+                        autoComplete="name"
+                        name="vehicle-label"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="vehicle-label-name"
+                        label="Naziv oznake"
+                        onChange={handleLabelName}
+                        autoFocus
+                    />
+                </Grid>
+                <Grid item xs={12}>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="select-vehicle-number-type">{message.vehicleNumberTypes}</InputLabel>
+                        <InputLabel id="select-vehicle-number-type">{message.vehicleParams}</InputLabel>
                         <Select
                             labelId="select-type"
                             id="select-type"
-                            value={type.name}
-                            onChange={selectNumberType}
-                        >{
-                                types.map(
+                            value={param.name}
+                            onChange={selectParam}
+                        >
+                            {
+                                params.map(
                                     e => <MenuItem value={e.name} key={e.key}>{e.name}</MenuItem>
                                 )
                             }
@@ -93,13 +118,62 @@ export default function VehicleLabel() {
                             id="select-type"
                             value={vehicleCategory.category}
                             onChange={selectVehicleCategory}
-                        >{
+                        >
+                            {
                                 vehicleCategories.map(
                                     e => <MenuItem value={e.category} key={e.key}>{e.category}</MenuItem>
                                 )
                             }
                         </Select>
                     </FormControl>
+                </Grid>
+                {
+                    param.type === "numerical" ?
+                        <Grid item xs={6}>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel id="operation-on-numerical-types">{message.operation}</InputLabel>
+                                <Select
+                                    labelId="operation-on-numerical-types"
+                                    id="operation-on-numerical-types"
+                                    value={currentOperation}
+                                    onChange={(e) => setCurrentOperation(e.target.value)}
+                                >
+                                    {
+                                        numericalOperations.map(
+                                            e => <MenuItem value={e} key={e}>{e}</MenuItem>
+                                        )
+                                    }
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        : null
+                }
+                {param.type === "numerical" ?
+                    <Grid item xs={6}>
+                        <FormControl fullWidth className={classes.margin} variant="filled">
+                            <InputLabel htmlFor="parameter-unit">{message.paramUnit}</InputLabel>
+                            <FilledInput
+                                id="param-unit"
+                                value={paramValue}
+                                type="number"
+                                onChange={(e) => setParamValue(e.target.value)}
+                                endAdornment={<InputAdornment position="start">{param.unit}</InputAdornment>}
+                            />
+                        </FormControl>
+
+                    </Grid>
+                    : null
+                }
+                <Grid item xs={12}>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        {message.save}
+                    </Button>
                 </Grid>
             </Grid>
         </div >

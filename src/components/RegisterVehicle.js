@@ -65,7 +65,7 @@ const Chapters = function ({ value }) {
 
 
 
-export default function RegisterVehicle(){
+export default function RegisterVehicle(props){
     const classes = useStyles();
 
     const [vehicle, setVehicle] = useState({

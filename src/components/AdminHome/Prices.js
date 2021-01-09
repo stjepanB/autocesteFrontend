@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Paper, CircularProgress, FormLabel, Select, MenuItem, InputLabel, FormControl, Grid, FilledInput, InputAdornment } from "@material-ui/core";
 import message from "../../properties/messagesForUser";
 import Title from "../Home/Title";
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+
     },
     formControl: {
         margin: theme.spacing(1),
@@ -77,11 +78,37 @@ const useStyles = makeStyles((theme) => ({
 export default function Prices() {
     const classes = useStyles();
     const [isLoading, setIsLoading] = useState(true);
+    const timer = useRef();
     const [current, setCurrent] = useState({
-        key: 2,
-        section: 'Zagreb - Jastrebarsko',
-        infrastructure: 12.50,
-        outside: 1.10
+        key: "",
+        section: '',
+        IA: {
+            infrastructure : "",
+            outside : ""
+        },
+        I :  {
+            infrastructure : "",
+            outside : ""
+        },
+        II:  {
+            infrastructure : "",
+            outside : ""
+        },
+        III:  {
+            infrastructure : "",
+            outside : ""
+        },
+        IV :  {
+            infrastructure : "",
+            outside : ""
+        }
+    })
+    const [curTot, setCurTot] = useState({
+        IA: "",
+        I: "",
+        II: "",
+        III: "",
+        IV: ""
     })
     const [values, setValues] = useState([]);
     const [buttonLoading, setButtonLoading] = useState(false);
@@ -90,7 +117,20 @@ export default function Prices() {
         [classes.buttonSuccess]: success,
     });
 
-
+    const mySetCurTot = (current) => {
+        var ia =  parseFloat(current.IA.infrastructure) + parseFloat(current.IA.outside);
+        var i =  parseFloat(current.I.infrastructure) + parseFloat(current.I.outside);
+        var ii =  parseFloat(current.II.infrastructure) + parseFloat(current.II.outside);
+        var iii =  parseFloat(current.III.infrastructure) + parseFloat(current.III.outside);
+        var iv = parseFloat(current.IV.infrastructure) + parseFloat(current.IV.outside);
+        setCurTot( {
+            IA : ia.toFixed(2),
+            I: i.toFixed(2),
+            II: ii.toFixed(2),
+            III: iii.toFixed(2),
+            IV: iv.toFixed(2)
+        })
+    }
     useEffect(() => {
         async function fetch() {
             const tmpSections = await getSectionsPrices();
@@ -98,6 +138,7 @@ export default function Prices() {
             if (tmpSections && tmpSections[0]) {
                 setValues(tmpSections)
                 setCurrent(tmpSections[0])
+                mySetCurTot(tmpSections[0])
                 setIsLoading(false);
             }
         }
@@ -117,9 +158,12 @@ export default function Prices() {
                 setSuccess(true);
                 setButtonLoading(false);
             }
+
+            timer.current = window.setTimeout(() => {
+                setSuccess(false);
+              }, 2000);
         }
     };
-
 
     const handleOutside = function (e) {
         var tmpCurrent = current;
@@ -134,6 +178,7 @@ export default function Prices() {
                 infrastructure: current[category].infrastructure
             }
         })
+        mySetCurTot(tmpCurrent)
         handle(tmpCurrent)
     }
 
@@ -151,8 +196,10 @@ export default function Prices() {
             }
 
         })
+        mySetCurTot(tmpCurrent)
         handle(tmpCurrent)
     }
+
     const handle = function (curr) {
 
         const tmpValues = values.filter(e => e.section !== curr.section);
@@ -163,13 +210,14 @@ export default function Prices() {
     const selectSection = function (event) {
         const tmpCurrent = values.find(e => event.target.value === e.section);
         setCurrent(tmpCurrent);
+        mySetCurTot(tmpCurrent)
     }
 
     return (
         isLoading ?
             <div>
                 <Paper className={classes.paper}>
-                    <CircularProgress size={160} thickness={5.6} />
+                    <CircularProgress size={160} thickness={4.6} />
                 </Paper>
             </div>
             :
@@ -197,7 +245,7 @@ export default function Prices() {
                             <Grid item xs={2}>
                                 <FormLabel>{message.vehicleCategoriesNames.IA}</FormLabel>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-IA">{message.infrastructureCost}</InputLabel>
                                     <FilledInput
@@ -209,7 +257,7 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="outside-IA">{message.outsideCost}</InputLabel>
                                     <FilledInput
@@ -221,10 +269,22 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
+                            <Grid item xs={4}>
+                                <FormControl fullWidth className={classes.margin} variant="filled">
+                                    <InputLabel htmlFor="infrastructure-IA">{message.totalCost}</InputLabel>
+                                    <FilledInput
+                                        id="infrastructure-IA"
+                                        value={curTot.IA}
+                                        type="number"
+                                        disabled
+                                        endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
+                                    />
+                                </FormControl>
+                            </Grid>
                             <Grid item xs={2}>
                                 <FormLabel>{message.vehicleCategoriesNames.I}</FormLabel>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-I">{message.infrastructureCost}</InputLabel>
                                     <FilledInput
@@ -236,7 +296,7 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="outside-I">{message.outsideCost}</InputLabel>
                                     <FilledInput
@@ -248,10 +308,22 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
+                            <Grid item xs={4}>
+                                <FormControl fullWidth className={classes.margin} variant="filled">
+                                    <InputLabel htmlFor="infrastructure-I">{message.totalCost}</InputLabel>
+                                    <FilledInput
+                                        id="infrastructure-I"
+                                        value={curTot.I}
+                                        type="number"
+                                        disabled
+                                        endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
+                                    />
+                                </FormControl>
+                            </Grid>
                             <Grid item xs={2}>
                                 <FormLabel>{message.vehicleCategoriesNames.II}</FormLabel>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-II">{message.infrastructureCost}</InputLabel>
                                     <FilledInput
@@ -263,7 +335,7 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="outside-II">{message.outsideCost}</InputLabel>
                                     <FilledInput
@@ -275,10 +347,22 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
+                            <Grid item xs={4}>
+                                <FormControl fullWidth className={classes.margin} variant="filled">
+                                    <InputLabel htmlFor="total-II">{message.totalCost}</InputLabel>
+                                    <FilledInput
+                                        id="total-II"
+                                        value={curTot.II}
+                                        type="number"
+                                        disabled
+                                        endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
+                                    />
+                                </FormControl>
+                            </Grid>
                             <Grid item xs={2}>
                                 <FormLabel>{message.vehicleCategoriesNames.III}</FormLabel>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-III">{message.infrastructureCost}</InputLabel>
                                     <FilledInput
@@ -290,7 +374,7 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="outside-III">{message.outsideCost}</InputLabel>
                                     <FilledInput
@@ -302,10 +386,22 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
+                            <Grid item xs={4}>
+                                <FormControl fullWidth className={classes.margin} variant="filled">
+                                    <InputLabel htmlFor="total-III">{message.totalCost}</InputLabel>
+                                    <FilledInput
+                                        id="total-III"
+                                        value={curTot.III}
+                                        type="number"
+                                        disabled
+                                        endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
+                                    />
+                                </FormControl>
+                            </Grid>
                             <Grid item xs={2}>
                                 <FormLabel>{message.vehicleCategoriesNames.IV}</FormLabel>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-IV">{message.infrastructureCost}</InputLabel>
                                     <FilledInput
@@ -318,7 +414,7 @@ export default function Prices() {
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={3}>
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="outside-IV">{message.outsideCost}</InputLabel>
                                     <FilledInput
@@ -326,6 +422,18 @@ export default function Prices() {
                                         value={current.IV.outside}
                                         type="number"
                                         onChange={handleOutside}
+                                        endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
+                                    />
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormControl fullWidth className={classes.margin} variant="filled">
+                                    <InputLabel htmlFor="total-IV">{message.totalCost}</InputLabel>
+                                    <FilledInput
+                                        id="total-IV"
+                                        value={curTot.IV}
+                                        type="number"
+                                        disabled
                                         endAdornment={<InputAdornment position="start">{message.unit}</InputAdornment>}
                                     />
                                 </FormControl>
@@ -359,7 +467,7 @@ export default function Prices() {
                             </Grid>
                         </Grid>
                     </form>
-                </Paper>
-            </div>
+                </Paper >
+            </div >
     )
 }

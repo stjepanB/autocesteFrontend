@@ -1,4 +1,4 @@
-const root = "http://localhost:9000"
+const root = "http://localhost:18080"
 
 const url = {
     register : root + "/register",
@@ -14,6 +14,5 @@ export const localUrl = {
     homepage: "/",
     vehicleRegister : "/vehicle"
 }
-
 
 export default url;
