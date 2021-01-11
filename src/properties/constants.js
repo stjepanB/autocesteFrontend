@@ -1,4 +1,4 @@
-const root = "http://localhost:18080"
+const root = "http://app:9000/api"
 
 const url = {
     register : root + "/register",
