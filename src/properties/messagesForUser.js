@@ -31,11 +31,11 @@ const message = {
         vehicleCategory : "Kategorija vozila",
         vehicleParams: "Podaci o vozilima",
         vehicleCategoriesNames : {
-                IA : "Kategorija IA",
-                I : "Kategorija I",
-                II : "Kategorija II",
-                III : "Kategorija III",
-                IV : "Kategorija IV" 
+                IA : "IA",
+                I : "I",
+                II : "II",
+                III : "III",
+                IV : "IV" 
         },
         pricesSetup : "Cijene dionica",
         infrastructureCost: "Infrastrukturna pristojba",
@@ -47,6 +47,9 @@ const message = {
         DiscountLabel: "Oznake za popuste",
         Discount: "Popusti",
         paramUnit: "Vrijednost",
+        hasGreenCertificate : "Automobil posjeduje zeleni certifikat.",
+        categoryDescription : "OPIS KATEGORIJE",
+        categoryLabel: "OZNAKA KATEGORIJE",
 }
 
 

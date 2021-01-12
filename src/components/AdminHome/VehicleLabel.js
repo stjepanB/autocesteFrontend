@@ -1,4 +1,5 @@
 import { getVehicleParams } from "../../actions/vehicleActions"
+import {setVehicleDiscountLabel} from "../../actions/adminActions"
 import React, { useEffect, useState } from "react";
 import { Grid, TextField, Button, FilledInput, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,7 +56,11 @@ export default function VehicleLabel() {
         "vise (>)", "manje (<)", "jednako (=)"
     ])
     const [currentOperation, setCurrentOperation] = useState("vise (>)")
-    const [paramValue, setParamValue] = useState({})
+    const [value, setValue] = useState({})
+    const [labelInfo, setLabelInfo] = useState({
+
+        value: ""
+    })
 
     useEffect(() => {
         const tmp = getVehicleParams();
@@ -154,9 +159,9 @@ export default function VehicleLabel() {
                             <InputLabel htmlFor="parameter-unit">{message.paramUnit}</InputLabel>
                             <FilledInput
                                 id="param-unit"
-                                value={paramValue}
+                                value={value}
                                 type="number"
-                                onChange={(e) => setParamValue(e.target.value)}
+                                onChange={(e) => setValue(e.target.value)}
                                 endAdornment={<InputAdornment position="start">{param.unit}</InputAdornment>}
                             />
                         </FormControl>

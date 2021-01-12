@@ -2,29 +2,25 @@ import axios from "axios"
 import url from "../properties/constants";
 
 
-export async function getSectionsPrices() {
-
+const getConfig = () => {
         var token = localStorage.getItem("token");
         const config = {
                 headers: {
                         Authorization: token
                 }
         }
-        const response = await axios.get(url.sections, config)
+        return config;
+}
+
+export async function getSectionsPrices() {
+        const response = await axios.get(url.sections, getConfig())
         return response.data
 }
 
 export async function setSectionsPrices(sectionsDto) {
-        var token = localStorage.getItem("token");
-        const config = {
-                headers: {
-                        Authorization: token
-                }
-        }
-
-        console.log(sectionsDto)
+        
         try {
-                const response = await axios.post(url.sections, sectionsDto, config)
+                const response = await axios.post(url.sections, sectionsDto, getConfig())
                 return response.data
         } catch (error) {
                 console.log(error)
@@ -32,59 +28,11 @@ export async function setSectionsPrices(sectionsDto) {
         }
 }
 
-/** HARDCODE DATA
- *
- *
-        const tmp =  [{
-                key: 1,
-                section : 'Šibenik - Split',
-
-                IA : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                I : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                II : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                III : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                IV : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                }
-
-            },
-            {
-                key: 2,
-                section:'Zagreb - Jastrebarsko',
-                IA : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                I : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                II : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                III : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                },
-                IV : {
-                        infrastructure: 23.50,
-                        outside: 1.10
-                }
-
-            }
-        ]
- */
+export async function setVehicleDiscountLabel(vehicleDiscountLabel){
+       try {
+          const response = await axios.post(url.vehicleDiscountLabel, vehicleDiscountLabel, getConfig())
+       }catch (error){
+               console.log(error)
+               return "FAILED"
+       }
+}

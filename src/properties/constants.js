@@ -1,4 +1,4 @@
-const root = "http://app:9000/api"
+const root = "http://localhost:9000/api"
 
 const url = {
     register : root + "/register",
@@ -8,6 +8,7 @@ const url = {
     profile: root + "/profile",
     isAdmin: root + '/admin',
     sections: root + "/sections",
+    vehicleDiscountLabel: root + "/discount/label"+"/id=vehicle"
 }
 
 export const localUrl = {
