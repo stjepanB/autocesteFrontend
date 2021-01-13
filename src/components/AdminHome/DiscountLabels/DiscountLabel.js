@@ -5,8 +5,8 @@ import { Radio, FormControl, FormControlLabel, RadioGroup } from '@material-ui/c
 import VehicleLabel from "./VehicleLabel";
 import OrganizationLabel from "./OrganizationLabel";
 import PrivateUserLabel from "./PrivateUserLabel";
-import message from "../../properties/messagesForUser";
-import Title from "../Home/Title";
+import message from "../../../properties/messagesForUser";
+import Title from "../../Home/Title";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function DiscountLabel() {
     const classes = useStyles()
     const [selectedItem, setSelectedItem] = useState("vehicle")
-
 
     return (
         <div className={classes.root}>
@@ -63,7 +62,6 @@ export default function DiscountLabel() {
                         />
                     </RadioGroup>
                 </FormControl>
-
                 
                 {selectedItem === "privateUser" ?
                     <PrivateUserLabel /> :

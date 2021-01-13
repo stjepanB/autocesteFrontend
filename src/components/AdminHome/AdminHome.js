@@ -1,5 +1,5 @@
 import React from "react"
-import DiscountLabel from "./DiscountLabel"
+import DiscountLabel from "./DiscountLabels/DiscountLabel"
 import Prices from "./Prices"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';

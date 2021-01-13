@@ -50,6 +50,23 @@ const message = {
         hasGreenCertificate : "Automobil posjeduje zeleni certifikat.",
         categoryDescription : "OPIS KATEGORIJE",
         categoryLabel: "OZNAKA KATEGORIJE",
+        has_green_certificate: "Zeleni certifikat",
+        height: "Visina",
+        max_weight_with_cargo: "Maksimalna težina",
+        manufacturer: "Proizvođač",
+        category: "Kategorija",
+        color: "Boja",
+        type: "Model",
+        plate: "Tablice",
+}
+export const backendNames = {
+       "Zeleni certifikat" : "has_green_certificate",
+       "Visina" : "height",
+       "Proizvođač" : "manufacturer",
+       "Kategorija" : "category",
+       "Boja" : "color",
+        "Model" : "type",
+        "Tablice" : "plate"
 }
 
 

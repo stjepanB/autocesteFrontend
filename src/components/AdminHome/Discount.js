@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Discount() {
     const classes = useStyles();
     return (
-
         <div className={classes.root}>
             <Paper className={classes.paper} variant="outlined">
                 <Title children={message.Discount} />

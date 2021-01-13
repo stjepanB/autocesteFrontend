@@ -1,15 +1,21 @@
 import url from "../properties/constants"
 import axios from "axios"
+import message from "../properties/messagesForUser"
 
 
-export async function getVehicles() {
+const getConfig = () => {
   var token = localStorage.getItem("token");
   const config = {
     headers: {
       Authorization: token
     }
   }
-  const response = await axios.get(url.vehicles, config)
+  return config
+}
+
+export async function getVehicles() {
+
+  const response = await axios.get(url.vehicles, getConfig())
 
   return response.data
 }
@@ -17,15 +23,8 @@ export async function getVehicles() {
 
 export async function registerVehicle(vehicle) {
 
-  var token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token
-    }
-  }
-
   try {
-    const response = await axios.post(url.vehicleRegister, vehicle, config)
+    const response = await axios.post(url.vehicleRegister, vehicle, getConfig())
     return response.data
   } catch (error) {
     console.log(error)
@@ -33,22 +32,15 @@ export async function registerVehicle(vehicle) {
 }
 
 
-export function getVehicleParams() {
-  return [
-    {
-      key: 1,
-      name: "Težina s teretom",
-      type: "numerical"
-    },
-    {
-      key: 2,
-      name: "Visina vozila",
-      type: "numerical"
-    },
-    {
-      key: 2,
-      name: "Zeleni certifikat",
-      type: "text",
-    }
-  ]
+export async function getVehicleParams() {
+
+  const response = await axios.get(url.vehicleParams, getConfig())
+  mapNames(response.data);
+  return response.data
+}
+
+const mapNames = (data) => {
+  return data.forEach(element => {
+    element['name'] = message[element['name']]
+  });
 }
