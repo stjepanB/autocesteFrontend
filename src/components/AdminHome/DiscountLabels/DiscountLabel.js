@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export default function DiscountLabel() {
+export default function DiscountLabel(props) {
     const classes = useStyles()
     const [selectedItem, setSelectedItem] = useState("vehicle")
 
@@ -62,11 +62,12 @@ export default function DiscountLabel() {
                         />
                     </RadioGroup>
                 </FormControl>
-                
+
                 {selectedItem === "privateUser" ?
-                    <PrivateUserLabel /> :
+                    <PrivateUserLabel labels={props.labels} setLabels={props.setLabels}/> :
                     selectedItem === "vehicle" ?
-                        <VehicleLabel/> : <OrganizationLabel />
+                        <VehicleLabel labels={props.labels} setLabels={props.setLabels}/> :
+                         <OrganizationLabel labels={props.labels} setLabels={props.setLabels}/>
                 }
             </Paper>
         </div>

@@ -11,9 +11,10 @@ const url = {
     isAdmin: root + '/admin',
     sections: root + "/sections",
     discountLabel: "/discount/label",
-    vehicleDiscountLabel: root + discountLabel + "?id=vehicle",
-    privateDiscountLabel: root + discountLabel + "?id=private",
-    organisationDiscountLabel: root + discountLabel + "?id=organisation"
+    discountLabels: "/discount/labels",
+    vehicleDiscountLabel: root + discountLabel + '?type=vehicle',
+    privateDiscountLabel: root + discountLabel + '?type=private',
+    organisationDiscountLabel: root + discountLabel + '?type=organisation'
 }
 
 

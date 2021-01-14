@@ -3,7 +3,7 @@ import { setVehicleDiscountLabel } from "../../../actions/adminActions"
 import React, { useEffect, useState } from "react";
 import { Grid, TextField, Button, FilledInput, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
-import message, { backendNames } from "../../../properties/messagesForUser";
+import message, { backendNames, operationNames } from "../../../properties/messagesForUser";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function VehicleLabel() {
+export default function VehicleLabel(props) {
     const classes = useStyles();
     const [param, setParam] = useState({
         key: 1,
@@ -53,9 +53,9 @@ export default function VehicleLabel() {
         category: message.vehicleCategoriesNames.IA
     })
     const [numericalOperations] = useState([
-        "vise (>)", "manje (<)", "jednako (=)"
+        operationNames.MORE, operationNames.LESS, operationNames.EQUALS
     ])
-    const [currentOperation, setCurrentOperation] = useState("vise (>)")
+    const [currentOperation, setCurrentOperation] = useState(operationNames.MORE)
     const [value, setValue] = useState("")
     const [labelName, setLabelName] = useState("")
 
@@ -65,23 +65,24 @@ export default function VehicleLabel() {
             name: labelName,
             vehicleCategory: vehicleCategory.category,
             paramType: backendNames[param.name],
-            operation: (param.type === "numerical") ? currentOperation : "None",
+            operation: (param.type === "numerical") ? operationNames[currentOperation] : "NONE",
             value: value,
         }
         const response = await setVehicleDiscountLabel(dto)
 
-        if (response === "OK") {
-            console.log("SVE OK")
+        if (response === 200) {
+            const tmp = props.labels;
+            tmp.push(dto)
+            props.setLabels(tmp);
         } else {
-            console.log("IMAMO PROBLEM");
+            console.log("IMAMO PROBLEM" + response);
         }
     }
 
     useEffect(() => {
-
         async function fetch() {
             var tmp = await getVehicleParams();
-            setParams(tmp); //change for async function
+            setParams(tmp);
             setParam(tmp[0]);
         }
         fetch()
