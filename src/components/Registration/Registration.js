@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PrivateRegistration from "./PrivateRegistration"
 import LegalRegistration from "./LegalRegistration"
 import { Radio, FormControl, FormControlLabel, RadioGroup } from '@material-ui/core';
+import {Link} from "react-router-dom"
 
 
 export default function Registration() {
@@ -38,7 +39,6 @@ export default function Registration() {
                 <PrivateRegistration />
                 : <LegalRegistration />
             }
-
         </div>
 
     );

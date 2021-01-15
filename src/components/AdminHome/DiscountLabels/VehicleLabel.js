@@ -1,9 +1,14 @@
 import { getVehicleParams } from "../../../actions/vehicleActions"
 import { setVehicleDiscountLabel } from "../../../actions/adminActions"
-import React, { useEffect, useState } from "react";
-import { Grid, TextField, Button, FilledInput, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
+import React, { useEffect,useRef, useState } from "react";
+import { Grid, TextField, Button, FilledInput, Fab, CircularProgress, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import message, { backendNames, operationNames } from "../../../properties/messagesForUser";
+import SaveIcon from '@material-ui/icons/Save';
+import CheckIcon from '@material-ui/icons/Check';
+import { green } from '@material-ui/core/colors';
+import clsx from 'clsx';
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -13,7 +18,36 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         minWidth: 220,
-    }
+    },
+    fabButtonRoot: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonSuccess: {
+        backgroundColor: green[500],
+        '&:hover': {
+            backgroundColor: green[700],
+        },
+    },
+    fabProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: -6,
+        left: -6,
+        zIndex: 1,
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 
 }));
 
@@ -21,7 +55,7 @@ export default function VehicleLabel(props) {
     const classes = useStyles();
     const [param, setParam] = useState({
         key: 1,
-        name: "Težina s teretom",
+        name: "",
         type: "numerical"
     });
     const [params, setParams] = useState([]);
@@ -58,24 +92,44 @@ export default function VehicleLabel(props) {
     const [currentOperation, setCurrentOperation] = useState(operationNames.MORE)
     const [value, setValue] = useState("")
     const [labelName, setLabelName] = useState("")
+    const [success, setSuccess] = useState(false);
+    const [buttonLoading, setButtonLoading] = useState(false);
+    const buttonClassname = clsx({
+        [classes.buttonSuccess]: success,
+    });
+    const timer = useRef();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const dto = {
-            name: labelName,
-            vehicleCategory: vehicleCategory.category,
-            paramType: backendNames[param.name],
-            operation: (param.type === "numerical") ? operationNames[currentOperation] : "NONE",
-            value: value,
-        }
-        const response = await setVehicleDiscountLabel(dto)
 
-        if (response === 200) {
-            const tmp = props.labels;
-            tmp.push(dto)
-            props.setLabels(tmp);
-        } else {
-            console.log("IMAMO PROBLEM" + response);
+        if (!buttonLoading) {
+            setSuccess(false);
+            setButtonLoading(true);
+            const dto = {
+                name: labelName,
+                vehicleCategory: vehicleCategory.category,
+                paramType: backendNames[param.name],
+                operation: (param.type === "numerical") ? operationNames[currentOperation] : "NONE",
+                value: value,
+            }
+            const response = await setVehicleDiscountLabel(dto)
+
+
+            if (response === 200) {
+                setSuccess(true);
+                setButtonLoading(false);
+                const lab = props.labels;
+                dto['key'] = Math.random() * 1000;
+                lab.push(dto)
+                props.setLabels([... lab]);
+            }else {
+                console.log("IMAMO PROBLEM" + response);
+            }
+
+            timer.current = window.setTimeout(() => {
+                setSuccess(false);
+            }, 2000);
         }
     }
 
@@ -187,17 +241,32 @@ export default function VehicleLabel(props) {
 
                         </Grid>
                         : null
-                    }
-                    <Grid item xs={12}>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            {message.save}
-                        </Button>
+                    }                       <Grid item xs={12}>
+                        <div className={classes.fabButtonRoot}>
+                            <div className={classes.wrapper}>
+                                <Fab
+                                    aria-label="save"
+                                    color="primary"
+                                    className={buttonClassname}
+                                    onClick={handleSubmit}
+                                >
+                                    {success ? <CheckIcon /> : <SaveIcon />}
+                                </Fab>
+                                {buttonLoading && <CircularProgress size={68} className={classes.fabProgress} />}
+                            </div>
+                            <div className={classes.wrapper}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={buttonClassname}
+                                    disabled={buttonLoading}
+                                    onClick={handleSubmit}
+                                >
+                                    {message.save}
+                                </Button>
+                                {buttonLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                            </div>
+                        </div>
                     </Grid>
                 </Grid>
             </form>

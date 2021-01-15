@@ -38,7 +38,14 @@ export async function setVehicleDiscountLabel(vehicleDiscountLabel) {
 }
 
 export async function getVehicleDiscountLabels() {
-        const response = await axios.get(url.discountLabels, getConfig())
+
+        try {
+                const response = await axios.get(url.discountLabel, getConfig())
+                return response.data
+               
+        } catch (error) {
+                console.log(error)
+        }
 }
 
 export async function getOrganisationLabels() {

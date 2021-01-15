@@ -14,7 +14,7 @@ import {validateEmail,validateOib,validatePassword} from "../../validators/regis
 import {register} from "../../actions/userActions"
 import message from "../../properties/messagesForUser";
 import Snackbar from '@material-ui/core/Snackbar';
-
+import {Link as ReactLink} from "react-router-dom";
 
 function Copyright() {
     return (
@@ -279,6 +279,11 @@ function Copyright() {
               Registriraj se
             </Button>
           </form>
+          <Grid container>
+              <Grid item>
+                <ReactLink to="/">Prijava korisnika</ReactLink>
+              </Grid>
+            </Grid>
         </div>
         <Box mt={5}>
           <Copyright />

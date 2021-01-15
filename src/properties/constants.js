@@ -10,8 +10,8 @@ const url = {
     profile: root + "/profile",
     isAdmin: root + '/admin',
     sections: root + "/sections",
-    discountLabel: "/discount/label",
-    discountLabels: "/discount/labels",
+    discountLabel: root + "/discount/label",
+    discountLabels: root + "/discount/labels",
     vehicleDiscountLabel: root + discountLabel + '?type=vehicle',
     privateDiscountLabel: root + discountLabel + '?type=private',
     organisationDiscountLabel: root + discountLabel + '?type=organisation'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from "@material-ui/core";
 import { Radio, FormControl, FormControlLabel, RadioGroup } from '@material-ui/core';
@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DiscountLabel(props) {
     const classes = useStyles()
-    const [selectedItem, setSelectedItem] = useState("vehicle")
+    const [selectedItem, setSelectedItem] = useState("vehicle");
+
 
     return (
         <div className={classes.root}>
@@ -64,10 +65,10 @@ export default function DiscountLabel(props) {
                 </FormControl>
 
                 {selectedItem === "privateUser" ?
-                    <PrivateUserLabel labels={props.labels} setLabels={props.setLabels}/> :
+                    <PrivateUserLabel labels={props.labels} setLabels={props.setLabels} /> :
                     selectedItem === "vehicle" ?
-                        <VehicleLabel labels={props.labels} setLabels={props.setLabels}/> :
-                         <OrganizationLabel labels={props.labels} setLabels={props.setLabels}/>
+                        <VehicleLabel labels={props.labels} setLabels={props.setLabels} /> :
+                        <OrganizationLabel labels={props.labels} setLabels={props.setLabels} />
                 }
             </Paper>
         </div>

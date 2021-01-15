@@ -14,7 +14,8 @@ import { getVehicleDiscountLabels, getPrivateUserLabels, getOrganisationLabels }
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
@@ -25,31 +26,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminHome() {
     const classes = useStyles();
-    const [labels, setLabels] = useState([{ "Slavko": "" }]);
+    const [labels, setLabels] = useState([{ "Slavko": "", "key": 1, "checked": false },
+     { "Zdeslav": "", "key": 2, "checked" : false }]);
 
     useEffect(() => {
-        var vehicleLabels;
-        var privateUserLabels;
-        var organisationLabels;
+        var vehicleLabels = [];
+        var privateUserLabels = [];
+        var organisationLabels = [];
         let isMounted = true;
         if (isMounted) {
             const fetch = async () => {
                 vehicleLabels = await getVehicleDiscountLabels();
-                vehicleLabels.forEach(e => e["guiLabelTyle"] = "vehicle")
                 privateUserLabels = await getPrivateUserLabels();
-                privateUserLabels.forEach(e => e["guiLabelTyle"] = "privateUser")
                 organisationLabels = await getOrganisationLabels();
+
+                let i = 0;
+                vehicleLabels.forEach(e => e["guiLabelTyle"] = "vehicle")
+                vehicleLabels.forEach(e => e["key"] = ++i);
+                vehicleLabels.forEach(e => e["checked"] = false);
+                privateUserLabels.forEach(e => e["guiLabelTyle"] = "privateUser")
+                privateUserLabels.forEach(e => e["key"] = ++i);
+                privateUserLabels.forEach(e => e["checked"] = false);
                 organisationLabels.forEach(e => e["guiLabelTyle"] = "organisation");
-                return vehicleLabels.concat(privateUserLabels, organisationLabels);
+                organisationLabels.forEach(e => e["key"] = ++i);
+                organisationLabels.forEach(e => e["checked"] = false);
+                setLabels(vehicleLabels.concat(privateUserLabels, organisationLabels));
             }
-            console.log(labels)
-            setLabels(fetch());
+
+            fetch();
         }
-        return ()=> {isMounted = false}
+        return () => { isMounted = false }
     }, [])
 
     return (
-        <div>
+        <div className={classes.root}>
             <Grid container spacing={2}>
                 <Grid item xs={8}>
                     <Prices />

@@ -273,7 +273,7 @@ export default function Prices() {
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-IA">{message.totalCost}</InputLabel>
                                     <FilledInput
-                                        id="infrastructure-IA"
+                                        id="total-IA"
                                         value={curTot.IA}
                                         type="number"
                                         disabled
@@ -312,7 +312,7 @@ export default function Prices() {
                                 <FormControl fullWidth className={classes.margin} variant="filled">
                                     <InputLabel htmlFor="infrastructure-I">{message.totalCost}</InputLabel>
                                     <FilledInput
-                                        id="infrastructure-I"
+                                        id="total-I"
                                         value={curTot.I}
                                         type="number"
                                         disabled
