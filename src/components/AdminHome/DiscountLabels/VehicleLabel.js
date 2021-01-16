@@ -1,6 +1,6 @@
 import { getVehicleParams } from "../../../actions/vehicleActions"
 import { setVehicleDiscountLabel } from "../../../actions/adminActions"
-import React, { useEffect,useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Grid, TextField, Button, FilledInput, Fab, CircularProgress, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import message, { backendNames, operationNames } from "../../../properties/messagesForUser";
@@ -106,6 +106,7 @@ export default function VehicleLabel(props) {
         if (!buttonLoading) {
             setSuccess(false);
             setButtonLoading(true);
+            console.log(param)
             const dto = {
                 name: labelName,
                 vehicleCategory: vehicleCategory.category,
@@ -113,22 +114,24 @@ export default function VehicleLabel(props) {
                 operation: (param.type === "numerical") ? operationNames[currentOperation] : "NONE",
                 value: value,
             }
+            console.log(dto)
             const response = await setVehicleDiscountLabel(dto)
 
-
-            if (response === 200) {
+            if (response === "OK") {
                 setSuccess(true);
                 setButtonLoading(false);
                 const lab = props.labels;
-                dto['key'] = Math.random() * 1000;
+                dto['key'] = Math.round(Math.random() * 1000000);
+                console.log(dto['key']);
                 lab.push(dto)
-                props.setLabels([... lab]);
-            }else {
+                props.setLabels([...lab]);
+            } else {
                 console.log("IMAMO PROBLEM" + response);
             }
 
             timer.current = window.setTimeout(() => {
                 setSuccess(false);
+                setLabelName("");
             }, 2000);
         }
     }
@@ -139,7 +142,7 @@ export default function VehicleLabel(props) {
             setParams(tmp);
             setParam(tmp[0]);
         }
-        fetch()
+        fetch();
     }, [])
 
     const selectParam = (e) => {
@@ -241,7 +244,8 @@ export default function VehicleLabel(props) {
 
                         </Grid>
                         : null
-                    }                       <Grid item xs={12}>
+                    }
+                    <Grid item xs={12}>
                         <div className={classes.fabButtonRoot}>
                             <div className={classes.wrapper}>
                                 <Fab

@@ -10,7 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import message from "../../properties/messagesForUser";
 import Discount from "./Discount";
-import { getVehicleDiscountLabels, getPrivateUserLabels, getOrganisationLabels } from "../../actions/adminActions"
+import DiscountsList from "./DiscountsList"
+import { getVehicleDiscountLabels,getDiscounts, getPrivateUserLabels, getOrganisationLabels } from "../../actions/adminActions"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,20 +27,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminHome() {
     const classes = useStyles();
-    const [labels, setLabels] = useState([{ "Slavko": "", "key": 1, "checked": false },
-     { "Zdeslav": "", "key": 2, "checked" : false }]);
+    const [labels, setLabels] = useState([]);
+    const [discounts, setDiscounts] = useState([]);
 
     useEffect(() => {
         var vehicleLabels = [];
         var privateUserLabels = [];
         var organisationLabels = [];
+        var tmpDiscounts = [];
         let isMounted = true;
         if (isMounted) {
             const fetch = async () => {
                 vehicleLabels = await getVehicleDiscountLabels();
                 privateUserLabels = await getPrivateUserLabels();
                 organisationLabels = await getOrganisationLabels();
-
+                tmpDiscounts = await getDiscounts()
                 let i = 0;
                 vehicleLabels.forEach(e => e["guiLabelTyle"] = "vehicle")
                 vehicleLabels.forEach(e => e["key"] = ++i);
@@ -50,7 +52,11 @@ export default function AdminHome() {
                 organisationLabels.forEach(e => e["guiLabelTyle"] = "organisation");
                 organisationLabels.forEach(e => e["key"] = ++i);
                 organisationLabels.forEach(e => e["checked"] = false);
+
+                console.log(tmpDiscounts)
+
                 setLabels(vehicleLabels.concat(privateUserLabels, organisationLabels));
+                setDiscounts([...tmpDiscounts])
             }
 
             fetch();
@@ -83,10 +89,26 @@ export default function AdminHome() {
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <Typography className={classes.heading}>{message.Discount}</Typography>
+                            <Typography className={classes.heading}>{message.createDiscount}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Discount labels={labels} setLabels={setLabels} />
+                            <Discount labels={labels} 
+                                      setLabels={setLabels} 
+                                      setDiscounts={setDiscounts}
+                                      discounts={discounts}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel2a-content"
+                                    id="discounts-header"
+                        >
+                            <Typography className={classes.heading}>{message.Discounts}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <DiscountsList discounts={discounts}/>
                         </AccordionDetails>
                     </Accordion>
                 </Grid>

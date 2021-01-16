@@ -14,7 +14,8 @@ const url = {
     discountLabels: root + "/discount/labels",
     vehicleDiscountLabel: root + discountLabel + '?type=vehicle',
     privateDiscountLabel: root + discountLabel + '?type=private',
-    organisationDiscountLabel: root + discountLabel + '?type=organisation'
+    organisationDiscountLabel: root + discountLabel + '?type=organisation',
+    discount: root + "/discount",
 }
 
 

@@ -28,9 +28,8 @@ export async function setSectionsPrices(sectionsDto) {
 
 export async function setVehicleDiscountLabel(vehicleDiscountLabel) {
         try {
-                console.log(vehicleDiscountLabel)
                 const response = await axios.post(url.vehicleDiscountLabel, vehicleDiscountLabel, getConfig())
-                return response.status
+                return response.data
         } catch (error) {
                 console.log(error)
                 return "FAILED"
@@ -38,11 +37,9 @@ export async function setVehicleDiscountLabel(vehicleDiscountLabel) {
 }
 
 export async function getVehicleDiscountLabels() {
-
         try {
                 const response = await axios.get(url.discountLabel, getConfig())
                 return response.data
-               
         } catch (error) {
                 console.log(error)
         }
@@ -54,4 +51,23 @@ export async function getOrganisationLabels() {
 
 export async function getPrivateUserLabels() {
         return []
+}
+
+export async function setDiscount(dto) {
+        try {
+                const response = await axios.post(url.discount, dto, getConfig())
+                return response.data
+        } catch (error) {
+                console.log(error)
+                return "FAILED"
+        }
+}
+
+export async function getDiscounts() {
+        try {
+                const response = await axios.get(url.discount, getConfig())
+                return response.data
+        } catch (error) {
+                console.log(error)
+        }
 }

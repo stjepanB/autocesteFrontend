@@ -45,7 +45,8 @@ const message = {
         unit: "kn/km",
         save: "Spremi",
         DiscountLabel: "Oznake za popuste",
-        Discount: "Popusti",
+        createDiscount: "Napravi popust",
+        Discounts: "Popusti",
         paramUnit: "Vrijednost",
         hasGreenCertificate: "Automobil posjeduje zeleni certifikat.",
         categoryDescription: "OPIS KATEGORIJE",
@@ -58,10 +59,15 @@ const message = {
         color: "Boja",
         type: "Model",
         plate: "Tablice",
+        discountEndDate: "Kraj popusta",
+        discountStartDate: "Početak popusta",
+        discountAmount: "Iznos popusta na infrastrukturnu pristojbu",
+        choosenMarks: "Odabrane oznake",
 }
 export const backendNames = {
         "Zeleni certifikat": "has_green_certificate",
         "Visina": "height",
+        "Maksimalna težina" : "max_weight_with_cargo",
         "Proizvođač": "manufacturer",
         "Kategorija": "category",
         "Boja": "color",
@@ -75,7 +81,7 @@ export const operationNames = {
         EQUALS: "jednako (=)",
         NONE: "None",
         "vise (>)" : "MORE",
-        "manje (<)" : "VISE",
+        "manje (<)" : "LESS",
         "jednako (=)" : "EQUALS",
         "None" : "NONE"
 }
