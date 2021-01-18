@@ -19,10 +19,9 @@ const useStyles = makeStyles((theme) => ({
 function Navbar() {
     const classes = useStyles();
 
-  
-    
       const handleLogout = () =>{
         localStorage.removeItem('token');
+        localStorage.removeItem('admin')
         window.location.reload();
 
       }

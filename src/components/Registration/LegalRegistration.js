@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {validateEmail,validateOib,validatePassword} from "../../validators/registrationValidators"
+import {Link as ReactLink} from "react-router-dom";
 
 
 function Copyright() {
@@ -193,6 +194,11 @@ function Copyright() {
               Registriraj se
             </Button>
           </form>
+          <Grid container>
+          <Grid item>
+            <ReactLink to="/">Prijava korisnika</ReactLink>
+          </Grid>
+        </Grid>
         </div>
         <Box mt={5}>
           <Copyright />
