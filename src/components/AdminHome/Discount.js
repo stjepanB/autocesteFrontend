@@ -118,7 +118,7 @@ export default function Discount(props) {
                 setButtonLoading(false);
                 setDiscountName("");
                 window.location.reload(false);
-                
+
             }
 
             timer.current = window.setTimeout(() => {

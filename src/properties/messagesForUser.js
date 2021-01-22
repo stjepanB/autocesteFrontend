@@ -79,10 +79,12 @@ export const operationNames = {
         MORE: "vise (>)",
         LESS: "manje (<)",
         EQUALS: "jednako (=)",
+        PRESENT: "posjeduje/naziv",
         NONE: "None",
         "vise (>)" : "MORE",
         "manje (<)" : "LESS",
         "jednako (=)" : "EQUALS",
+        "posjeduje/naziv" : "PRESENT",
         "None" : "NONE"
 }
 
