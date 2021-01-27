@@ -11,6 +11,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import message from "../../properties/messagesForUser";
 import Discount from "./Discount";
 import DiscountsList from "./DiscountsList"
+import Reports from "./Reports"
 import { getVehicleDiscountLabels,getDiscounts, getPrivateUserLabels, getOrganisationLabels } from "../../actions/adminActions"
 
 const useStyles = makeStyles((theme) => ({
@@ -109,6 +110,18 @@ export default function AdminHome() {
                         </AccordionSummary>
                         <AccordionDetails>
                             <DiscountsList discounts={discounts}/>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel2a-content"
+                                    id="reports-header"
+                        >
+                            <Typography className={classes.heading}>{message.reports}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Reports />
                         </AccordionDetails>
                     </Accordion>
                 </Grid>

@@ -63,6 +63,12 @@ const message = {
         discountStartDate: "Početak popusta",
         discountAmount: "Iznos popusta na infrastrukturnu pristojbu",
         choosenMarks: "Odabrane oznake",
+        entryTime: "Vrijeme ulaza",
+        entry: "Mjesto ulaza",
+        exitTime: "Vrijeme izlaza",
+        exit: "Mjesto izlaza",
+        amount: "Iznos",
+        reports: "Neregistrirani korisnici"
 }
 export const backendNames = {
         "Zeleni certifikat": "has_green_certificate",
