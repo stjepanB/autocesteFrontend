@@ -6,7 +6,7 @@ import Title from "../Home/Title";
 import message from "../../properties/messagesForUser";
 import 'date-fns';
 import compareAsc from 'date-fns/compareAsc'
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import SaveIcon from '@material-ui/icons/Save';
 import CheckIcon from '@material-ui/icons/Check';
@@ -102,7 +102,6 @@ export default function Discount(props) {
             setButtonLoading(true);
             const labelNames = props.labels.filter(l => l.checked).map(e => e.name);
             const dto = {
-                name: discountName,
                 "labels": labelNames,
                 "startDate": startDate,
                 "endDate": endDate,
@@ -118,7 +117,7 @@ export default function Discount(props) {
                 setButtonLoading(false);
                 setDiscountName("");
                 window.location.reload(false);
-                
+
             }
 
             timer.current = window.setTimeout(() => {

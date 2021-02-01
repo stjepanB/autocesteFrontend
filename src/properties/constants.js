@@ -16,6 +16,8 @@ const url = {
     privateDiscountLabel: root + discountLabel + '?type=private',
     organisationDiscountLabel: root + discountLabel + '?type=organisation',
     discount: root + "/discount",
+    bills: root + "/bills",
+    reports: root + "/reports"
 }
 
 
