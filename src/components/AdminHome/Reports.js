@@ -47,7 +47,6 @@ export default function Reports() {
                                 <TableCell>{message.entry}</TableCell>
                                 <TableCell>{message.exitTime}</TableCell>
                                 <TableCell>{message.exit}</TableCell>
-                                <TableCell align="right">{message.amount}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -66,7 +65,6 @@ export default function Reports() {
                                 <TableCell>{message.entry}</TableCell>
                                 <TableCell>{message.exitTime}</TableCell>
                                 <TableCell>{message.exit}</TableCell>
-                                <TableCell align="right">{message.amount}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -74,10 +72,9 @@ export default function Reports() {
                                 <TableRow key={row.id}>
                                     <TableCell>{row.plate}</TableCell>
                                     <TableCell>{row.entryTime}</TableCell>
-                                    <TableCell>{row.entry}</TableCell>
+                                    <TableCell>{row.locationEntry}</TableCell>
                                     <TableCell>{row.exitTime}</TableCell>
-                                    <TableCell>{row.exit}</TableCell>
-                                    <TableCell align="right">{row.amount}</TableCell>
+                                    <TableCell>{row.locationExit}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
