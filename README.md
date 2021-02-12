@@ -25,5 +25,7 @@ This project was made as a student assignment and was used as an opportunity to 
 
 
 <img src="./img/architecture2.png" alt="architecture" width="438">
+
 --- 
+
 This project was made by [Stjepan Benčić](https://www.linkedin.com/in/stjepan-bencic/)
