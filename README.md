@@ -24,6 +24,6 @@ This project was made as a student assignment and was used as an opportunity to 
 
 
 
-<img src="./img/architecture.png" alt="Size Limit CLI" width="738">
+<img src="./img/architecture.png" alt="architecture" width="438">
 --- 
 This project was made by [Stjepan Benčić](https://www.linkedin.com/in/stjepan-bencic/)
