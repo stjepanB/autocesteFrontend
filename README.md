@@ -15,12 +15,12 @@ This project was made as a student assignment and was used as an opportunity to 
 
 # Project components
 
-| Components                                                                                               |
-| -----------------------------------------------------------------------------------------                |
-| [mainService](https://github.com/stjepanB/autocesteBackend)                                              |
-| [Service for trip reconstruction](https://github.com/stjepanB/autocesteTripReconstructionService)                     |
-| [GUI] (https://github.com/stjepanB/autocesteFrontend)                                                    | 
-| [tripGeneratorScript] (https://github.com/stjepanB/tripGenerator)                                        |
+| Components                                                                      | Description
+| ------------------------------------------------------------------------------  | -------------
+| [Main](https://github.com/stjepanB/autocesteBackend)                            | REST API for user and admin        |
+| [Reconstruction](https://github.com/stjepanB/autocesteTripReconstructionService)| REST API for collecting data from sensors|
+| [GUI ](https://github.com/stjepanB/autocesteFrontend)                           | Static server with JSX files       |
+| [Generator](https://github.com/stjepanB/tripGenerator)                          | Python script that generates trips |
 
 --- 
 This project was made by [Stjepan Benčić](https://www.linkedin.com/in/stjepan-bencic/)
