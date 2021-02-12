@@ -22,5 +22,8 @@ This project was made as a student assignment and was used as an opportunity to 
 | [GUI ](https://github.com/stjepanB/autocesteFrontend)                           | Static server with JSX files       |
 | [Generator](https://github.com/stjepanB/tripGenerator)                          | Python script that generates trips |
 
+
+
+<img src="./img/architecture.png" alt="Size Limit CLI" width="738">
 --- 
 This project was made by [Stjepan Benčić](https://www.linkedin.com/in/stjepan-bencic/)
