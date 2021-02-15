@@ -6,6 +6,7 @@ import Title from "../Home/Title";
 import message from "../../properties/messagesForUser";
 import 'date-fns';
 import compareAsc from 'date-fns/compareAsc'
+import format from 'date-fns/format'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import SaveIcon from '@material-ui/icons/Save';
@@ -115,8 +116,14 @@ export default function Discount(props) {
                 setSuccess(true);
                 setButtonLoading(false);
                 setDiscountName("");
-                window.location.reload(false);
-
+                const disc = {
+                    "labels": labelNames,
+                    "startDate": format(startDate,'yyyy-MM-dd').toString(),
+                    "endDate": format(endDate, 'yyyy-MM-dd').toString(),
+                    "percentage": percentage,
+                    "name": discountName
+                }
+                props.addDiscount(disc);
             }
 
             timer.current = window.setTimeout(() => {

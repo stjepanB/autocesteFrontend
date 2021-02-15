@@ -21,6 +21,9 @@ export default function AdminHome() {
     const classes = useStyles();
     const [labels, setLabels] = useState([]);
     const [discounts, setDiscounts] = useState([]);
+    const addDiscount = (discount) => setDiscounts(d => [... d, discount])
+    
+
 
     useEffect(() => {
         var vehicleLabels = [];
@@ -66,8 +69,7 @@ export default function AdminHome() {
                 <Grid item xs={4}>
                     <Discount labels={labels}
                         setLabels={setLabels}
-                        setDiscounts={setDiscounts}
-                        discounts={discounts}
+                        addDiscount={addDiscount}
                     />
                 </Grid>
                 <Grid item xs={4}>

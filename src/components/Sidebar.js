@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Sidebar(props) {
-
+    var index = 0;
     const classes = useStyles();
     const [visible, setVisible] = useState(false);
 
@@ -61,9 +61,9 @@ export default function Sidebar(props) {
                         { text: message.reports, index: "/reports" },
                         { text: message.pricesSetup, index: "/prices" }
                     ].map(
-                        (e, index) => (
+                        (e) => (
                             <Link to={e.index} className={classes.link}>
-                                <ListItem button key={index}>
+                                <ListItem button key={index++}>
                                     <ListItemText primary={e.text} />
                                 </ListItem>
                             </Link>
