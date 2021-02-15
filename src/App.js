@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { TokenContextProvider } from "./context/TokenContext"
 import RegisterVehicle from "./components/RegisterVehicle"
 import AdminHome from "./components/AdminHome/AdminHome"
+import Prices from "./components/AdminHome/Prices"
+import Reports from "./components/AdminHome/Reports"
 
 export default function App() {
 
@@ -36,8 +38,12 @@ export default function App() {
           isLoggedIn ?
             isAdmin ?
               <BrowserRouter>
-                <Navbar />
-                <Route exact path="/" component={AdminHome} />
+                <Navbar isAdmin={true} />
+                <Switch>
+                  <Route exact path="/" component={AdminHome} />
+                  <Route path="/prices" component={Prices} />
+                  <Route path="/reports" component={Reports} />
+                </Switch>
               </BrowserRouter>
               :
               <BrowserRouter>
@@ -62,6 +68,6 @@ export default function App() {
             </BrowserRouter>
         }
       </TokenContextProvider>
-    </div>
+    </div >
   );
 }

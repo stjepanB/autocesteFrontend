@@ -68,12 +68,13 @@ const message = {
         exitTime: "Vrijeme izlaza",
         exit: "Mjesto izlaza",
         amount: "Iznos",
-        reports: "Neregistrirani korisnici"
+        reports: "Neregistrirani korisnici",
+        menu: "Izbornik"
 }
 export const backendNames = {
         "Zeleni certifikat": "has_green_certificate",
         "Visina": "height",
-        "Maksimalna težina" : "max_weight_with_cargo",
+        "Maksimalna težina": "max_weight_with_cargo",
         "Proizvođač": "manufacturer",
         "Kategorija": "category",
         "Boja": "color",
@@ -87,11 +88,11 @@ export const operationNames = {
         EQUALS: "jednako (=)",
         PRESENT: "posjeduje/naziv",
         NONE: "None",
-        "vise (>)" : "MORE",
-        "manje (<)" : "LESS",
-        "jednako (=)" : "EQUALS",
-        "posjeduje/naziv" : "PRESENT",
-        "None" : "NONE"
+        "vise (>)": "MORE",
+        "manje (<)": "LESS",
+        "jednako (=)": "EQUALS",
+        "posjeduje/naziv": "PRESENT",
+        "None": "NONE"
 }
 
 
