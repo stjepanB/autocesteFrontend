@@ -1,4 +1,4 @@
-const root = "http://localhost:9000/api"
+const root = process.env.REACT_APP_URL +"/api";
 const discountLabel = "/discount/label"
 
 const url = {
