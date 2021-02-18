@@ -1,4 +1,4 @@
-const root = process.env.REACT_APP_URL +"/api";
+const root = "/api";
 const discountLabel = "/discount/label"
 
 const url = {
