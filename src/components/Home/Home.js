@@ -102,17 +102,17 @@ export default function Home() {
            <main className={classes.content}>
            <Container maxWidth="lg" className={classes.container}>
              <Grid container spacing={3}>
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={12} md={9} lg={9}>
                     <Paper className={fixedHeightPaper}>
                         <Vehicles />
                     </Paper>
                 </Grid>
-                <Grid item xs={12} md={8} lg={3}>
+                <Grid item xs={12} md={3} lg={3}>
                     <Paper className={fixedHeightPaper}>
                         <SmallProfil />
                     </Paper>
                 </Grid>
-               <Grid item xs={12}>
+               <Grid item xs={12} md={12} lg={12}>
                  <Paper className={classes.paper}>
                     <Bills />
                  </Paper>

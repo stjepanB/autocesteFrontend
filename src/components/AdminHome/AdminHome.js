@@ -21,7 +21,7 @@ export default function AdminHome() {
     const classes = useStyles();
     const [labels, setLabels] = useState([]);
     const [discounts, setDiscounts] = useState([]);
-    const addDiscount = (discount) => setDiscounts(d => [... d, discount])
+    const addDiscount = (discount) => setDiscounts(d => [...d, discount])
     
 
 
@@ -63,16 +63,16 @@ export default function AdminHome() {
         <div className={classes.root}>
             <Grid container spacing={2}>
 
-                <Grid item xs={4}>
+                <Grid item xs={4} sm={3} md={8} lg={3}>
                     <DiscountLabel labels={labels} setLabels={setLabels} />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={4} sm={3} md={8} lg={3}>
                     <Discount labels={labels}
                         setLabels={setLabels}
                         addDiscount={addDiscount}
                     />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={4} sm={3} md={8} lg={3}>
                     <DiscountsList discounts={discounts} />
                 </Grid>
             </Grid>

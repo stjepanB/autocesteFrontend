@@ -1,4 +1,5 @@
 const root = "/api";
+//const root = "http://localhost:9000/api"
 const discountLabel = "/discount/label"
 
 const url = {
