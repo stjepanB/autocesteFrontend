@@ -22,9 +22,9 @@ This project was made as a student assignment and was used as an opportunity to 
 | [GUI ](https://github.com/stjepanB/autocesteFrontend)                           | Static server with JSX files       |
 | [Generator](https://github.com/stjepanB/tripGenerator)                          | Python script that generates trips |
 
+# Project schema
 
+<img src="./img/architecture2.png" alt="architecture" width="328">
+ 
 
-<img src="./img/architecture2.png" alt="architecture" width="438">
-
---- 
 This project was made by [Stjepan Benčić](https://www.linkedin.com/in/stjepan-bencic/)
