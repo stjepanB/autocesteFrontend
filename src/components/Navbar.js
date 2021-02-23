@@ -1,7 +1,8 @@
 import React from 'react';
-import {  makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from "@material-ui/core"
 import Button from '@material-ui/core/Button';
+import Sidebar from "./Sidebar.js"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,32 +17,41 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Navbar() {
-    const classes = useStyles();
+function Navbar(props) {
+  const classes = useStyles();
 
-      const handleLogout = () =>{
-        localStorage.removeItem('token');
-        localStorage.removeItem('admin')
-        window.location.reload();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('admin')
+    window.location.reload();
 
-      }
- 
-    
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
+  }
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        {props.isAdmin ?
           <Toolbar>
-           
+            <Sidebar />
             <Typography className={classes.title} variant="h6" >
               Autoceste
-            </Typography>
-            
+                </Typography>
+
             <Button color="inherit" onClick={handleLogout}>Odjava</Button>
           </Toolbar>
-        </AppBar>
-        
-      </div>
-    );
+          :
+          <Toolbar>
+            <Typography className={classes.title} variant="h6" >
+              Autoceste
+              </Typography>
+
+            <Button color="inherit" onClick={handleLogout}>Odjava</Button>
+          </Toolbar>
+        }
+      </AppBar>
+
+    </div >
+  );
 }
 
 

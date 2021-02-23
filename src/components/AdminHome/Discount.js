@@ -6,6 +6,7 @@ import Title from "../Home/Title";
 import message from "../../properties/messagesForUser";
 import 'date-fns';
 import compareAsc from 'date-fns/compareAsc'
+import format from 'date-fns/format'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import SaveIcon from '@material-ui/icons/Save';
@@ -59,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: -12,
     },
 }))
-
 
 export default function Discount(props) {
     const classes = useStyles();
@@ -116,8 +116,14 @@ export default function Discount(props) {
                 setSuccess(true);
                 setButtonLoading(false);
                 setDiscountName("");
-                window.location.reload(false);
-
+                const disc = {
+                    "labels": labelNames,
+                    "startDate": format(startDate,'yyyy-MM-dd').toString(),
+                    "endDate": format(endDate, 'yyyy-MM-dd').toString(),
+                    "percentage": percentage,
+                    "name": discountName
+                }
+                props.addDiscount(disc);
             }
 
             timer.current = window.setTimeout(() => {
@@ -171,7 +177,7 @@ export default function Discount(props) {
     const handleStartDate = (date) => {
         //Compare the two dates and return 1 if the first date is after the second,
         // -1 if the first date is before the second or 0 if dates are equal.
-        if (compareAsc(date, new Date) === -1) {
+        if (compareAsc(date, new Date()) === -1) {
             return
         }
         if (compareAsc(date, endDate) === 1) {
@@ -181,7 +187,7 @@ export default function Discount(props) {
     }
 
     const handleEndDate = (date) => {
-        if (compareAsc(date, new Date) === -1) {
+        if (compareAsc(date, new Date()) === -1) {
             return
         }
 
@@ -190,8 +196,6 @@ export default function Discount(props) {
         }
         setEndDate(date);
     }
-
-
 
     useEffect(() => { }, [chipData]);
 
@@ -252,7 +256,7 @@ export default function Discount(props) {
                                 )
                             }
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <Typography id="discrete-slider" gutterBottom>
                                 {message.discountAmount}
                             </Typography>
@@ -268,7 +272,7 @@ export default function Discount(props) {
                                 max={13}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
                                     margin="normal"

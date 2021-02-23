@@ -25,7 +25,6 @@ This project was made as a student assignment and was used as an opportunity to 
 # Project schema
 
 <img src="./img/architecture2.png" alt="architecture" width="328">
-
---- 
+ 
 
 This project was made by [Stjepan Benčić](https://www.linkedin.com/in/stjepan-bencic/)

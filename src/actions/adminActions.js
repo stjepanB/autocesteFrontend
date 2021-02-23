@@ -17,6 +17,9 @@ export async function getSectionsPrices() {
 }
 
 export async function setSectionsPrices(sectionsDto) {
+
+        console.log("Saljem : ");
+        console.log(sectionsDto)
         try {
                 const response = await axios.post(url.sections, sectionsDto, getConfig())
                 return response.data

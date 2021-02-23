@@ -149,11 +149,31 @@ export default function RegisterVehicle(props) {
       />
       <form onSubmit={handleSubmit}>
         <Grid container direction="row" spacing={3}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={12} lg={6}>
+            <TableContainer component={Paper} className={classes.paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">{message.categoryLabel}</TableCell>
+                    <TableCell>{message.categoryDescription}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {vehicleCategoryInfo.map((row) => (
+                    <TableRow key={row.category}>
+                      <TableCell align="left">{row.category}</TableCell>
+                      <TableCell padding='none' > <Chapters value={row.desc} /></TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+          <Grid item xs={12} md={12} lg={6}>
             <Paper className={classes.paper} variant="outlined">
               <Title>Registracija vozila</Title>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={12} lg={12}>
                   <TextField
                     autoComplete="manufacturer"
                     name="manufacturer"
@@ -169,7 +189,7 @@ export default function RegisterVehicle(props) {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={12} lg={12}>
                   <TextField
                     autoComplete="model"
                     name="model"
@@ -185,7 +205,7 @@ export default function RegisterVehicle(props) {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12} sm={12} md={3} lg={3}>
                   <FormControl className={classes.formControl} >
                     <InputLabel id="registration-plate-town">Grad</InputLabel>
                     <Select
@@ -202,7 +222,7 @@ export default function RegisterVehicle(props) {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12} sm={12} md={5} lg={5}>
 
                   <TextField
                     variant="outlined"
@@ -225,7 +245,7 @@ export default function RegisterVehicle(props) {
 
                   />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={12} md={4} lg={4}>
                   <TextField
                     variant="outlined"
                     type="outlined"
@@ -245,7 +265,7 @@ export default function RegisterVehicle(props) {
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <TextField
                     autoComplete="on"
                     name="maxWeightWithCargo"
@@ -273,7 +293,7 @@ export default function RegisterVehicle(props) {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12}  sm={12} md={12} lg={12}>
                   <TextField
                     autoComplete="on"
                     name="height"
@@ -301,7 +321,7 @@ export default function RegisterVehicle(props) {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <TextField
                     autoComplete="on"
                     name="axles"
@@ -326,7 +346,7 @@ export default function RegisterVehicle(props) {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6} lg={12}>
                   <FormControl className={classes.bigForm} >
                     <InputLabel id="vehicleCategory">Kategorija vozila</InputLabel>
                     <Select
@@ -348,7 +368,7 @@ export default function RegisterVehicle(props) {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6} lg={12}>
                   <TextField
                     autoComplete="color"
                     name="color"
@@ -364,7 +384,7 @@ export default function RegisterVehicle(props) {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <FormControl>
                     <FormControlLabel
                       control={
@@ -373,7 +393,7 @@ export default function RegisterVehicle(props) {
                           onChange={(e) => {
                             setVehicle({
                               ...vehicle,
-                              certificate: e.target.checked 
+                              certificate: e.target.checked
                             })
                           }}
                           name="checkedHasGreenCertificate"
@@ -384,7 +404,7 @@ export default function RegisterVehicle(props) {
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Button
                     type="submit"
                     fullWidth
@@ -395,7 +415,7 @@ export default function RegisterVehicle(props) {
                     Spremi
                             </Button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}  sm={12} md={6} lg={6}>
                   <Link to={localUrl.homepage}>
                     <Button
                       fullWidth
@@ -409,26 +429,6 @@ export default function RegisterVehicle(props) {
               </Grid>
 
             </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <TableContainer component={Paper} className={classes.paper}>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">{message.categoryLabel}</TableCell>
-                    <TableCell>{message.categoryDescription}</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {vehicleCategoryInfo.map((row) => (
-                    <TableRow key={row.category}>
-                      <TableCell align="left">{row.category}</TableCell>
-                      <TableCell padding='none' > <Chapters value={row.desc} /></TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
           </Grid>
         </Grid>
       </form>

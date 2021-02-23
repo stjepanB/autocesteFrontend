@@ -1,4 +1,5 @@
-const root = "http://app:18080/api"
+const root = "/api";
+//const root = "http://localhost:9000/api"
 const discountLabel = "/discount/label"
 
 const url = {
@@ -19,7 +20,6 @@ const url = {
     bills: root + "/bills",
     reports: root + "/reports"
 }
-
 
 export const localUrl = {
     homepage: "/",

@@ -13,8 +13,6 @@ const useStyles = makeStyles({
     },
 });
 
-
-
 export default function DiscountsList(props) {
 
     const classes = useStyles();
@@ -28,7 +26,7 @@ export default function DiscountsList(props) {
                             <TableCell>Naziv popusta</TableCell>
                             <TableCell>Početak</TableCell>
                             <TableCell>Završetak</TableCell>
-                            <TableCell align="right">Postotak</TableCell>
+                            <TableCell>Postotak</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -39,7 +37,7 @@ export default function DiscountsList(props) {
                                 </TableCell>
                                 <TableCell>{row.startDate}</TableCell>
                                 <TableCell>{row.endDate}</TableCell>
-                                <TableCell align="right">{row.percentage + " %"}</TableCell>
+                                <TableCell>{row.percentage + " %"}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
